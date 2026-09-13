@@ -1,0 +1,134 @@
+/* ============================= */
+/* Global Styles for LifeCare-AI */
+/* ============================= */
+
+/* Reset default spacing so every browser looks the same */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base font and background for the whole app */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F7FAFC;
+  color: #0F172A;
+}
+
+/* Remove default styling from links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove default styling from buttons */
+button {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+}
+
+/* Layout: sidebar + page content side by side */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+/* Inner padding used on every page */
+.page-inner {
+  padding: 32px 40px;
+}
+
+/* Small blue eyebrow label above a heading */
+.eyebrow-text {
+  color: #2196D3;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+/* Big page heading, example: "Today's Schedule" */
+.page-heading {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+/* Subtitle text under the page heading */
+.page-subheading {
+  color: #64748B;
+  font-size: 15px;
+}
+
+/* Card title used inside white cards, example: "Appointments" */
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+/* Card subtitle used under card titles */
+.card-subtitle {
+  color: #64748B;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Generic button styles */
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.btn-primary {
+  background: #2196D3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1a80ba;
+}
+
+.btn-primary:disabled {
+  background: #B9DFF2;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: white;
+  color: #0F172A;
+  border: 1px solid #DDE7EF;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.btn-icon {
+  font-size: 16px;
+}
+
+/* Responsive rule: on small screens the sidebar becomes stacked */
+@media (max-width: 900px) {
+  .page-content {
+    margin-left: 0;
+  }
+}

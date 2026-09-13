@@ -1,0 +1,73 @@
+.page-shell {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--surface-page);
+}
+
+.page-content {
+  display: flex;
+  min-height: 100vh;
+  flex: 1;
+  flex-direction: column;
+}
+
+.page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.dashboard-grid-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-grid-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn-become-donor-mobile {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(var(--brand-500-rgb), 0.4);
+  background-color: rgba(var(--brand-500-rgb), 0.05);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-700);
+}
+
+.btn-become-donor-mobile:hover {
+  background-color: rgba(var(--brand-500-rgb), 0.1);
+}
+
+@media (min-width: 640px) {
+  .page-main {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 640px) {
+  .btn-become-donor-mobile {
+    display: none;
+  }
+}
+
+/* On extra-large screens the dashboard splits into a wide main column
+   and a narrower 320px side column (used for the donor-count card). */
+@media (min-width: 1280px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}

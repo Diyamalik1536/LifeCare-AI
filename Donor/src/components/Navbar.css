@@ -1,0 +1,79 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+
+  height: 64px;
+  padding: 0 16px;
+
+  border-bottom: 1px solid var(--slate-200);
+  background-color: rgba(var(--surface-page-rgb), 0.8);
+
+  backdrop-filter: blur(6px);
+}
+
+.navbar-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.navbar-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--slate-500);
+}
+
+.navbar-actions {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-become-donor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(var(--brand-500-rgb), 0.3);
+
+  background-color: rgba(var(--brand-500-rgb), 0.1);
+
+  padding: 8px 12px;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-700);
+}
+
+.btn-become-donor:hover {
+  background-color: rgba(var(--brand-500-rgb), 0.2);
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-title {
+    font-size: 18px;
+  }
+
+  .navbar-actions {
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    padding: 0 24px;
+  }
+}
+

@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-full {
+  width: 140px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.logo-mark {
+  display: block;
+  object-fit: contain;
+}

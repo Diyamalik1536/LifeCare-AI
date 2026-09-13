@@ -1,0 +1,77 @@
+.dashboard {
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+padding: 24px 30px 40px;
+}
+
+.dashboard-welcome {
+margin-bottom: 24px;
+}
+
+.stats {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+
+gap: 20px;
+
+width: 100%;
+
+margin-bottom: 24px;
+}
+
+.next-appointment {
+margin-bottom: 24px;
+}
+
+.dashboard-grid {
+display: grid;
+grid-template-columns: 1.2fr 1fr;
+
+gap: 20px;
+
+width: 100%;
+
+margin-bottom: 24px;
+}
+
+.dashboard-card {
+background: #FFFFFF;
+
+border: 1px solid #D6EAF3;
+
+border-radius: 14px;
+
+padding: 22px;
+}
+
+.recent-section {
+width: 100%;
+}
+
+
+@media (max-width: 1000px) {
+
+.dashboard {
+padding: 20px;
+}
+
+.stats {
+grid-template-columns: 1fr;
+}
+
+.dashboard-grid {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 600px) {
+
+.dashboard {
+padding: 16px;
+}
+
+.dashboard-card {
+padding: 16px;
+}
+}

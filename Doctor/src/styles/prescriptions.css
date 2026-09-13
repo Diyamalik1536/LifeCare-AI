@@ -1,0 +1,97 @@
+/* ============================= */
+/* Prescriptions Page Styles */
+/* ============================= */
+
+.prescriptions-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:24px;
+}
+
+/* Previous Prescription Card */
+
+.prescriptions-card{
+  background:white;
+  border:1px solid #DDE7EF;
+  border-radius:16px;
+  padding:28px;
+}
+
+.prescriptions-list{
+  margin-top:10px;
+}
+
+/* ============================= */
+/* Create Prescription Form */
+/* ============================= */
+
+.prescription-form{
+  background:white;
+  border:1px solid #DDE7EF;
+  border-radius:16px;
+  padding:24px;
+  margin-bottom:24px;
+}
+
+.prescription-form h3{
+  margin-bottom:20px;
+  color:#0F172A;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+  color:#0F172A;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #DDE7EF;
+  border-radius:8px;
+  font-size:14px;
+  box-sizing:border-box;
+  font-family:inherit;
+}
+
+.form-group textarea{
+  resize:vertical;
+}
+
+.form-buttons{
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+}
+
+/* Mobile */
+
+@media (max-width:600px){
+
+  .prescriptions-top{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .prescriptions-card{
+    padding:18px;
+  }
+
+  .prescription-form{
+    padding:18px;
+  }
+
+  .form-buttons{
+    flex-direction:column;
+  }
+}

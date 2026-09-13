@@ -1,0 +1,159 @@
+
+.inventory-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  background: white;
+  padding: 12px;
+}
+
+.inventory-card-critical {
+  border-color: #f1b5b5;
+}
+
+.inventory-card-low {
+  border-color: #f3c7a5;
+}
+
+.inventory-card-moderate {
+  border-color: #ead99a;
+}
+
+.inventory-card-stable {
+  border-color: #b8dfc8;
+}
+
+/* Top */
+.inventory-card-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.inventory-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+
+  border-radius: 7px;
+  background: #e8f5fb;
+  color: #2498d1;
+}
+
+.inventory-card-type {
+  font-size: 16px;
+  font-weight: 700;
+  color: #183b4a;
+}
+
+/* Percentage + Status */
+.inventory-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+
+  margin-top: 10px;
+}
+
+.inventory-card-percentage {
+  font-size: 20px;
+  font-weight: 700;
+  color: #183b4a;
+}
+
+.status-badge {
+  flex-shrink: 0;
+
+  padding: 3px 6px;
+  border-radius: 999px;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* Status */
+.status-badge-critical {
+  background: #fff0f0;
+  color: #d64545;
+}
+
+.status-badge-low {
+  background: #fff4eb;
+  color: #d97732;
+}
+
+.status-badge-moderate {
+  background: #fff9df;
+  color: #9b7a00;
+}
+
+.status-badge-stable {
+  background: #eaf8ef;
+  color: #27834b;
+}
+
+/* Progress bar */
+.inventory-card-track {
+  width: 100%;
+  height: 6px;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf1f3;
+}
+
+.inventory-card-bar {
+  width: var(--bar-width, 0%);
+  height: 100%;
+  border-radius: 999px;
+}
+
+.inventory-card-bar-critical {
+  background: #d64545;
+}
+
+.inventory-card-bar-low {
+  background: #d97732;
+}
+
+.inventory-card-bar-moderate {
+  background: #d1ad32;
+}
+
+.inventory-card-bar-stable {
+  background: #3ca66b;
+}
+
+/* Units */
+.inventory-card-units {
+  margin: 7px 0 0;
+
+  font-size: 11px;
+  color: #6b8794;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .inventory-card {
+    padding: 10px;
+  }
+
+  .inventory-card-type {
+    font-size: 15px;
+  }
+
+  .inventory-card-percentage {
+    font-size: 18px;
+  }
+}
+

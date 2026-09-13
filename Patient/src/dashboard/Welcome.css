@@ -1,0 +1,62 @@
+.welcome-card {
+  background: #FFFFFF;
+
+  border: 1px solid #D6EAF3;
+
+  border-radius: 14px;
+
+  padding: 26px 28px;
+}
+
+.welcome-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+
+  color: #183B4A;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-card p {
+  color: #6B8794;
+
+  margin-top: 6px;
+
+  font-size: 14px;
+}
+
+.wave {
+  display: inline-block;
+
+  animation: wave 1.6s ease-in-out 1;
+
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(14deg);
+  }
+
+  30% {
+    transform: rotate(-8deg);
+  }
+
+  45% {
+    transform: rotate(14deg);
+  }
+
+  60% {
+    transform: rotate(-4deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -1,0 +1,88 @@
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #d6eaf3;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #183b4a;
+  margin: 0;
+}
+
+.header-subtitle {
+  color: #6b8794;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef7fd;
+  color: #2498d1;
+  padding: 7px 11px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.header-date-icon {
+  font-size: 14px;
+}
+
+.header-doctor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #eef7fd;
+  color: #2498d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.header-doctor-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #183b4a;
+  margin: 0;
+}
+
+.header-doctor-role {
+  font-size: 10px;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

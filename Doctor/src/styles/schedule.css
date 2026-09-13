@@ -1,0 +1,130 @@
+.schedule-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+.today-date-card {
+  background: #ffffff;
+  border: 1px solid #d6eaf3;
+  border-radius: 9px;
+  padding: 8px 12px;
+  text-align: right;
+}
+
+.today-date-label {
+  margin: 0 0 2px;
+  font-size: 10px;
+  color: #6b8794;
+}
+
+.today-date-value {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2498d1;
+}
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.schedule-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+}
+
+.appointments-card {
+  background: #ffffff;
+  border: 1px solid #d6eaf3;
+  border-radius: 11px;
+  padding: 15px;
+}
+
+.schedule-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.next-patient-card {
+  background: #ffffff;
+  border: 1px solid #d6eaf3;
+  border-radius: 11px;
+  padding: 15px;
+}
+
+.next-patient-title {
+  margin: 0 0 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #183b4a;
+}
+
+.next-patient-icon {
+  margin-right: 5px;
+  color: #2498d1;
+}
+
+.next-patient-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+}
+
+.next-patient-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #e1f3fa;
+  color: #2498d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.next-patient-name {
+  margin: 0 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #183b4a;
+}
+
+.next-patient-time {
+  margin: 0;
+  font-size: 11px;
+  color: #6b8794;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .schedule-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .schedule-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .today-date-card {
+    text-align: left;
+  }
+
+  .stats-row {
+    flex-direction: column;
+  }
+}

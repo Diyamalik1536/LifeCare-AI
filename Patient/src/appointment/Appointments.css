@@ -1,0 +1,248 @@
+.appointments-page {
+  width: 100%;
+}
+
+
+.appt-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+
+/* ===== Booking Form ===== */
+
+.book-form {
+  padding: 20px 22px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.book-form-row {
+  display: flex;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.book-form-row input {
+  flex: 1;
+
+  min-width: 180px;
+
+  background: #FFFFFF;
+
+  border: 1px solid var(--border);
+
+  color: var(--text);
+
+  padding: 10px 12px;
+
+  border-radius: var(--radius-sm);
+
+  font-size: 13px;
+
+  outline: none;
+}
+
+.book-form-row input:focus {
+  border-color: var(--accent);
+}
+
+.book-form .btn {
+  align-self: flex-start;
+}
+
+
+/* ===== Filters ===== */
+
+.filter-row {
+  display: flex;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: #FFFFFF;
+
+  border: 1px solid var(--border);
+
+  color: var(--text-muted);
+
+  padding: 7px 16px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: #EEF8FC;
+
+  color: var(--accent);
+}
+
+.filter-chip.active {
+  background: #E1F3FA;
+
+  color: var(--accent);
+
+  border-color: var(--accent);
+}
+
+
+
+.appointments-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.appt-card {
+  padding: 18px 20px;
+}
+
+.appt-main {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+
+
+.doctor-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #E1F3FA;
+
+  color: var(--accent);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+
+  flex-shrink: 0;
+}
+
+
+
+
+.appt-info {
+  flex: 1;
+
+  min-width: 200px;
+}
+
+.appt-info h3 {
+  color: var(--text);
+
+  font-size: 16px;
+
+  font-weight: 600;
+}
+
+.appt-info p {
+  color: var(--text-muted);
+
+  font-size: 13px;
+
+  margin: 2px 0;
+}
+
+.appt-datetime {
+  color: var(--text-dim);
+
+  font-size: 13px;
+}
+
+
+
+
+.appt-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid var(--border-soft);
+}
+
+
+/* ===== Reschedule ===== */
+
+.reschedule-box {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  flex-wrap: wrap;
+}
+
+.reschedule-box input {
+  background: #FFFFFF;
+
+  border: 1px solid var(--border);
+
+  color: var(--text);
+
+  padding: 8px 10px;
+
+  border-radius: var(--radius-sm);
+
+  font-size: 13px;
+
+  outline: none;
+}
+
+.reschedule-box input:focus {
+  border-color: var(--accent);
+}
+
+
+
+
+.appt-empty {
+  color: var(--text-muted);
+
+  font-size: 14px;
+
+  padding: 20px 0;
+
+  text-align: center;
+}

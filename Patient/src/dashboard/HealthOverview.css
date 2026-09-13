@@ -1,0 +1,120 @@
+.health-overview {
+  padding: 20px 22px;
+  background: #FFFFFF;
+}
+
+
+/* ===== Title ===== */
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.section-title-row h3 {
+  color: #183B4A !important;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  margin: 0;
+
+  display: block;
+  visibility: visible;
+}
+
+.section-subtitle {
+  color: #6B8794;
+
+  font-size: 12px;
+}
+
+
+/* ===== Vitals ===== */
+
+.vitals-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vital-item {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  background: #F4FAFD;
+
+  border: 1px solid #E8F3F8;
+
+  border-radius: 10px;
+
+  padding: 12px 14px;
+}
+
+
+/* ===== Icons ===== */
+
+.vital-icon {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: #E1F3FA;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+
+  flex-shrink: 0;
+}
+
+
+/* ===== Info ===== */
+
+.vital-info {
+  flex: 1;
+}
+
+.vital-label {
+  color: #6B8794 !important;
+
+  font-size: 12px;
+
+  margin: 0;
+}
+
+.vital-value {
+  color: #183B4A !important;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  margin: 2px 0 0;
+}
+
+.vital-value span {
+  color: #6B8794 !important;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+
+/* ===== Status ===== */
+
+.vital-status {
+  color: #3FA66B;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}

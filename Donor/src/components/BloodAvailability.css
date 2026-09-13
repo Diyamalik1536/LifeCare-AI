@@ -1,0 +1,101 @@
+.availability-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(var(--brand-500-rgb), 0.2);
+  background-color: var(--surface-card);
+  padding: 20px;
+}
+
+.availability-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.availability-icon {
+  display: flex;
+  height: 44px;
+  width: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background-color: rgba(var(--brand-500-rgb), 0.1);
+  color: var(--brand-500);
+}
+
+.availability-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand-700);
+}
+
+.availability-value {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--slate-900);
+}
+
+.availability-stats-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.summary-stat {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-200);
+  padding: 12px;
+  text-align: center;
+}
+
+.summary-stat-emerald {
+  background-color: rgba(var(--emerald-500-rgb), 0.1);
+}
+
+.summary-stat-amber {
+  background-color: rgba(var(--amber-500-rgb), 0.1);
+}
+
+.summary-stat-orange {
+  background-color: rgba(var(--orange-500-rgb), 0.1);
+}
+
+.summary-stat-red {
+  background-color: rgba(var(--emergency-500-rgb), 0.1);
+}
+
+.summary-stat-value {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.summary-stat-label {
+  margin: 0;
+  font-size: 11px;
+  color: var(--slate-500);
+}
+
+.availability-footnote {
+  margin: 14px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--slate-500);
+}
+
+@media (min-width: 640px) {
+  .availability-card {
+    padding: 24px;
+  }
+
+  .availability-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

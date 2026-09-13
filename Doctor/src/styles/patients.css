@@ -1,0 +1,113 @@
+/* ============================= */
+/* Patients Page Styles          */
+/* ============================= */
+
+.patients-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.total-patients-text {
+  font-size: 15px;
+  color: #0F172A;
+}
+
+.total-patients-number {
+  font-weight: 800;
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* Big white card that holds the search bar and the patient grid */
+
+.patients-records-card {
+  background: white;
+  border: 1px solid #DDE7EF;
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.patients-records-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Search Box */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F7FAFC;
+  border: 1px solid #DDE7EF;
+  border-radius: 10px;
+  padding: 10px 16px;
+  min-width: 260px;
+}
+
+.search-icon {
+  color: #94A3B8;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ============================= */
+/* Patient Cards Grid            */
+/* Desktop: 2 Cards Per Row      */
+/* ============================= */
+
+.patients-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.no-results-text {
+  text-align: center;
+  color: #64748B;
+  padding: 30px 0;
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+  .patients-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .patients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patients-records-card {
+    padding: 18px;
+  }
+
+  .patients-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+}

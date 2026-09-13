@@ -1,0 +1,337 @@
+
+:root {
+  --brand-50: #eef7fc;
+  --brand-100: #d7ecf8;
+  --brand-200: #b2dbef;
+  --brand-300: #7cc3e5;
+  --brand-400: #48a9da;
+  --brand-500: #2498d1;
+  --brand-500-rgb: 36, 152, 209;
+  --brand-600: #1c7cad;
+  --brand-700: #18658a;
+  --brand-800: #175370;
+  --brand-900: #16455c;
+
+  --surface-page: #e9f1f9;
+  --surface-page-rgb: 233, 241, 249;
+  --surface-card: #ffffff;
+  --surface-card-rgb: 255, 255, 255;
+  --surface-muted: #f5f9fd;
+  --surface-subtle: #f7fafd;
+
+  --emergency-400: #f87171;
+  --emergency-500: #ef4444;
+  --emergency-500-rgb: 239, 68, 68;
+  --emergency-600: #dc2626;
+
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-900-rgb: 15, 23, 42;
+
+  --emerald-500: #10b981;
+  --emerald-500-rgb: 16, 185, 129;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --amber-500: #f59e0b;
+  --amber-500-rgb: 245, 158, 11;
+  --amber-600: #d97706;
+  --orange-500: #f97316;
+  --orange-500-rgb: 249, 115, 22;
+  --orange-600: #ea580c;
+  --red-50: #fef2f2;
+
+  --shadow-glow: 0 0 0 1px rgba(var(--brand-500-rgb), 0.1), 0 14px 32px -14px rgba(var(--brand-500-rgb), 0.4);
+  --shadow-glow-red: 0 0 0 1px rgba(var(--emergency-500-rgb), 0.12), 0 14px 32px -14px rgba(var(--emergency-500-rgb), 0.38);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-panel: 0 20px 45px -10px rgba(15, 23, 42, 0.25);
+
+ 
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --sidebar-width: 256px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background-color: var(--surface-page);
+  color: var(--slate-900);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.icon-soft {
+  opacity: 0.8;
+}
+
+
+@keyframes lc-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes lc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: rgba(var(--slate-900-rgb), 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay-center {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--slate-900-rgb), 0.3);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 512px; 
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border: 1px solid var(--slate-200);
+  background-color: var(--surface-card);
+  padding: 20px;
+  box-shadow: var(--shadow-panel);
+}
+
+.modal-panel-md {
+  max-width: 448px;
+}
+
+.modal-panel-sm {
+  max-width: 384px;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+}
+
+.modal-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-icon {
+  display: flex;
+  height: 36px;
+  width: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.modal-icon-brand {
+  background-color: rgba(var(--brand-500-rgb), 0.15);
+  color: var(--brand-500);
+}
+
+.modal-icon-emergency {
+  background-color: rgba(var(--emergency-500-rgb), 0.15);
+  color: var(--emergency-600);
+}
+
+.modal-close-btn {
+  color: var(--slate-400);
+}
+
+.modal-close-btn:hover {
+  color: var(--slate-800);
+}
+
+.btn-primary {
+  flex: 1;
+  border-radius: var(--radius-sm);
+  background-color: var(--brand-500);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-600);
+}
+
+.btn-secondary {
+  flex: 1;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--slate-200);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--slate-600);
+}
+
+.btn-secondary:hover {
+  background-color: var(--slate-100);
+}
+
+.btn-danger {
+  flex: 1;
+  border-radius: var(--radius-sm);
+  background-color: var(--emergency-600);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: var(--emergency-500);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.field-label {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+
+.field-error {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--emergency-600);
+}
+
+.field-input {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--slate-200);
+  background-color: var(--surface-muted);
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--slate-900);
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: rgba(var(--brand-500-rgb), 0.5);
+  box-shadow: 0 0 0 1px rgba(var(--brand-500-rgb), 0.4);
+}
+
+.field-input-error {
+  border-color: rgba(var(--emergency-500-rgb), 0.5);
+}
+
+.field-input-error:focus {
+  box-shadow: 0 0 0 1px rgba(var(--emergency-500-rgb), 0.4);
+}
+
+.field-input-textarea {
+  resize: none;
+}
+
+.field-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--slate-500);
+}
+
+.field-checkbox {
+  margin-top: 2px;
+  height: 16px;
+  width: 16px;
+  flex-shrink: 0;
+  accent-color: var(--brand-500);
+}
+
+@media (min-width: 640px) {
+  .modal-overlay,
+  .modal-overlay-center {
+    align-items: center;
+    padding: 16px;
+  }
+
+  .modal-panel {
+    border-radius: var(--radius-xl);
+    padding: 24px;
+  }
+}
