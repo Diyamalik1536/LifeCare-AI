@@ -100,3 +100,10 @@
 .quick-book-form .btn {
   align-self: flex-start;
 }
+
+
+.quick-actions-note {
+  margin-top: 13px;
+  font-size: 12px;
+  line-height: 1.5;
+}

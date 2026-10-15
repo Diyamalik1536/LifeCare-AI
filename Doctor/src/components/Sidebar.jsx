@@ -5,8 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFileEarmarkText } from 'react-icons/bs'
 import '../styles/sidebar.css'
 
-// Sidebar component
-// Shows the logo, app name and navigation links
+
 function Sidebar() {
   return (
     <div className="sidebar">

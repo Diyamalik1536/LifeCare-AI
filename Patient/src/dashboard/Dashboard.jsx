@@ -7,35 +7,29 @@ import QuickActions from "./QuickActions";
 import RecentAppointments from "./RecentAppointments";
 import "./Dashboard.css";
 
-function Dashboard({ appointments, addAppointment }) {
+function Dashboard({ appointments }) {
+  const activeAppointments = appointments.filter((appointment) =>
+    ["Pending", "Confirmed", "Upcoming"].includes(appointment.status)
+  ).length;
 
   return (
     <div className="app-layout">
-
       <Sidebar />
-
       <main className="main-content">
-
         <Header title="Patient Dashboard" />
-
         <section className="dashboard">
-
-          {/* Welcome */}
           <div className="dashboard-welcome">
             <Welcome name="User" />
           </div>
 
-
-          {/* Statistics */}
           <div className="stats">
-
             <StatCard
               icon="📅"
               iconBg="rgba(6, 182, 212, 0.12)"
               title="Appointments"
-              value="Upcoming"
+              value={activeAppointments}
+              text="Active / upcoming"
             />
-
             <StatCard
               icon="📋"
               iconBg="rgba(6, 182, 212, 0.12)"
@@ -43,7 +37,6 @@ function Dashboard({ appointments, addAppointment }) {
               value="5"
               text="Total records"
             />
-
             <StatCard
               icon="🩸"
               iconBg="rgba(6, 182, 212, 0.12)"
@@ -51,37 +44,22 @@ function Dashboard({ appointments, addAppointment }) {
               value="1"
               text="Active request"
             />
-
           </div>
 
-
-          {/* Dashboard Grid */}
           <div className="dashboard-grid">
-
             <div className="dashboard-card">
               <HealthOverview />
             </div>
-
             <div className="dashboard-card">
-              <QuickActions
-                addAppointment={addAppointment}
-              />
+              <QuickActions />
             </div>
-
           </div>
 
-
-          {/* Recent Appointments */}
           <div className="dashboard-card recent-section">
-            <RecentAppointments
-              appointments={appointments}
-            />
+            <RecentAppointments appointments={appointments} />
           </div>
-
         </section>
-
       </main>
-
     </div>
   );
 }

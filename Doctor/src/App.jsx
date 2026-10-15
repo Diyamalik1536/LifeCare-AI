@@ -5,8 +5,7 @@ import Patients from './pages/Patients.jsx'
 import Consultations from './pages/Consultations.jsx'
 import Prescriptions from './pages/Prescriptions.jsx'
 
-// Main App component
-// It shows the Sidebar on the left and the page content on the right
+
 function App() {
   return (
     <div className="app-layout">

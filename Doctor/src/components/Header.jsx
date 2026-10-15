@@ -1,9 +1,7 @@
 import { MdOutlineCalendarToday } from 'react-icons/md'
 import '../styles/header.css'
 
-// Header component
-// Shows the page title, today's date and the doctor's info
-// pageTitle and pageSubtitleTop are passed in as props from each page
+
 
 function Header({ pageTitle }) {
   return (

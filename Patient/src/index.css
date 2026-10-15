@@ -297,3 +297,13 @@ textarea:focus {
     padding: 15px;
   }
 }
+
+.status-pill.pending {
+  background: #FFF3D5;
+  color: #946200;
+}
+
+.status-pill.confirmed {
+  background: #E1F3FA;
+  color: #1875A5;
+}

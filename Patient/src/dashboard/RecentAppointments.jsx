@@ -2,12 +2,29 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./RecentAppointments.css";
 
+function formatDate(dateValue) {
+  if (!dateValue) return "Date not set";
+  const parsed = new Date(`${dateValue}T00:00:00`);
+  if (Number.isNaN(parsed.getTime())) return dateValue;
+  return parsed.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function formatTime(timeValue) {
+  if (!timeValue) return "";
+  const [hour, minute] = timeValue.split(":").map(Number);
+  if (Number.isNaN(hour) || Number.isNaN(minute)) return timeValue;
+  const parsed = new Date();
+  parsed.setHours(hour, minute, 0, 0);
+  return parsed.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+}
+
 function RecentAppointments({ appointments }) {
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? appointments : appointments.slice(0, 3);
-
   const statusClass = {
     Upcoming: "upcoming",
+    Pending: "pending",
+    Confirmed: "confirmed",
     Completed: "completed",
     Cancelled: "cancelled",
   };
@@ -17,44 +34,33 @@ function RecentAppointments({ appointments }) {
       <div className="section-title-row">
         <h3>Recent Appointments</h3>
         {appointments.length > 3 && (
-          <button
-            className="view-all-link"
-            onClick={() => setShowAll((s) => !s)}
-          >
+          <button className="view-all-link" onClick={() => setShowAll((current) => !current)}>
             {showAll ? "Show Less" : "View All"}
           </button>
         )}
       </div>
 
       <div className="recent-list">
-        {visible.map((a) => (
-          <div className="recent-item" key={a.id}>
+        {visible.map((appointment) => (
+          <div className="recent-item" key={appointment.id}>
             <div className="recent-item-icon">👨‍⚕️</div>
-
             <div className="recent-item-info">
-              <h4>{a.doctor}</h4>
-              <p>{a.specialization}</p>
+              <h4>{appointment.doctor}</h4>
+              <p>{appointment.specialization}</p>
             </div>
-
             <div className="recent-item-datetime">
-              <span>📅 {a.date}</span>
-              <span>🕐 {a.time}</span>
+              <span>📅 {formatDate(appointment.date)}</span>
+              <span>🕐 {formatTime(appointment.time)}</span>
             </div>
-
-            <span className={`status-pill ${statusClass[a.status]}`}>
-              {a.status}
+            <span className={`status-pill ${statusClass[appointment.status] || "upcoming"}`}>
+              {appointment.status}
             </span>
           </div>
         ))}
-
-        {appointments.length === 0 && (
-          <p className="recent-empty">No appointments yet.</p>
-        )}
+        {appointments.length === 0 && <p className="recent-empty">No appointments yet.</p>}
       </div>
 
-      <Link to="/appointments" className="recent-manage-link">
-        Manage all appointments →
-      </Link>
+      <Link to="/appointments" className="recent-manage-link">Manage all appointments →</Link>
     </div>
   );
 }

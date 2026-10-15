@@ -6,15 +6,15 @@ import { prescriptions as initialPrescriptions } from '../data/prescriptions.js'
 import { patients } from '../data/patients.js'
 import '../styles/prescriptions.css'
 
-// Prescriptions page
+
 function Prescriptions() {
-  // Existing prescriptions
+
   const [prescriptions, setPrescriptions] = useState(initialPrescriptions)
 
-  // Show/Hide form
+
   const [showForm, setShowForm] = useState(false)
 
-  // Form data
+
   const [formData, setFormData] = useState({
     patient: '',
     medicine: '',
@@ -24,7 +24,7 @@ function Prescriptions() {
     note: ''
   })
 
-  // Save new prescription
+
   function handleSavePrescription() {
     if (!formData.patient || !formData.medicine || !formData.dosage) {
       alert('Please fill all required fields.')

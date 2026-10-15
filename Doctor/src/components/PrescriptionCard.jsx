@@ -1,8 +1,6 @@
 import '../styles/cards.css'
 
-// PrescriptionCard component
-// Shows one patient's prescription with a list of medicines
-// prescription data is passed in as a prop
+
 
 function PrescriptionCard({ prescription }) {
   return (

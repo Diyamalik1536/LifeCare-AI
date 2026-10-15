@@ -1,8 +1,5 @@
 import '../styles/cards.css'
 
-// StatCard component
-// Shows one statistic with an icon, a number and a label
-// icon, number and label are passed in as props
 
 function StatCard({ icon, number, label, iconBg }) {
   return (
