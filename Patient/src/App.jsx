@@ -1,92 +1,53 @@
-import { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dashboard from "./dashboard/Dashboard";
 import Appointments from "./appointment/Appointments";
 import HealthRecords from "./healthrecords/HealthRecords";
 import Messages from "./messages/Messages";
 
+import {
+  addAppointment,
+  updateAppointment,
+  cancelAppointment,
+} from "./store/appointmentsSlice";
+
 const STORAGE_KEY = "lifecare_patient_appointments";
 
-const sampleAppointments = [
-  {
-    id: "APT-SAMPLE-1",
-    patientName: "User",
-    date: "2026-10-18",
-    doctor: "Dr. Rahul Sharma",
-    specialization: "General Physician",
-    status: "Confirmed",
-    time: "10:30",
-    mode: "Online Consultation",
-    queueStatus: "Waiting",
-  },
-  {
-    id: "APT-SAMPLE-2",
-    patientName: "User",
-    date: "2026-08-12",
-    doctor: "Dr. Priya Mehta",
-    specialization: "Dermatologist",
-    status: "Completed",
-    time: "14:00",
-    mode: "Hospital Visit",
-    queueStatus: "Completed",
-  },
-  {
-    id: "APT-SAMPLE-3",
-    patientName: "User",
-    date: "2026-08-05",
-    doctor: "Dr. Amit Verma",
-    specialization: "Cardiologist",
-    status: "Completed",
-    time: "11:00",
-    mode: "Online Consultation",
-    queueStatus: "Completed",
-  },
-];
-
-function readSavedAppointments() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return sampleAppointments;
-    const parsed = JSON.parse(saved);
-    return Array.isArray(parsed) ? parsed : sampleAppointments;
-  } catch {
-    return sampleAppointments;
-  }
-}
-
 function App() {
-  const [appointments, setAppointments] = useState(readSavedAppointments);
+  const dispatch = useDispatch();
 
+  const appointments = useSelector(
+    (state) => state.appointments.items
+  );
+
+  // Save Redux appointments to LocalStorage
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(appointments));
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(appointments)
+      );
     } catch (error) {
-      console.error("Could not save appointments to localStorage:", error);
+      console.error(
+        "Could not save appointments to localStorage:",
+        error
+      );
     }
   }, [appointments]);
 
-  const addAppointment = (appointment) => {
-    const newAppointment = {
-      id: `APT-${Date.now()}`,
-      status: "Pending",
-      queueStatus: "Waiting",
-      ...appointment,
-    };
-    setAppointments((current) => [newAppointment, ...current]);
-    return newAppointment;
+  const handleAddAppointment = (appointment) => {
+    dispatch(addAppointment(appointment));
   };
 
-  const updateAppointment = (id, updates) => {
-    setAppointments((current) =>
-      current.map((appointment) =>
-        appointment.id === id ? { ...appointment, ...updates } : appointment
-      )
-    );
+  const handleUpdateAppointment = (id, updates) => {
+    dispatch(updateAppointment({ id, updates }));
   };
 
-  const cancelAppointment = (id) => {
-    updateAppointment(id, { status: "Cancelled" });
+  const handleCancelAppointment = (id) => {
+    dispatch(cancelAppointment(id));
   };
 
   return (
@@ -94,24 +55,21 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Dashboard
-              appointments={appointments}
-              addAppointment={addAppointment}
-            />
-          }
+          element={<Dashboard appointments={appointments} />}
         />
+
         <Route
           path="/appointments"
           element={
             <Appointments
               appointments={appointments}
-              addAppointment={addAppointment}
-              updateAppointment={updateAppointment}
-              cancelAppointment={cancelAppointment}
+              addAppointment={handleAddAppointment}
+              updateAppointment={handleUpdateAppointment}
+              cancelAppointment={handleCancelAppointment}
             />
           }
         />
+
         <Route path="/health-records" element={<HealthRecords />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="*" element={<Navigate to="/" replace />} />
