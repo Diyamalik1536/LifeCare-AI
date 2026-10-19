@@ -1,170 +1,178 @@
+/* ==============================
+   PATIENT SIDEBAR
+   LifeCare AI - Professional Theme
+================================ */
+
 .sidebar {
-width: 250px;
-height: 100vh;
-
-background: #FFFFFF;
-
-position: fixed;
-left: 0;
-top: 0;
-
-display: flex;
-flex-direction: column;
-
-border-right: 1px solid var(--border);
-
-z-index: 100;
-
-transition: transform 0.2s ease;
+  width: 250px;
+  height: 100vh;
+  background: #16324F;
+  color: #FFFFFF;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #24435F;
+  z-index: 100;
+  transition: width 0.2s ease;
 }
 
-/* ===== Brand ===== */
+/* Brand / Logo */
 
 .sidebar-brand {
-display: flex;
-align-items: center;
-
-gap: 10px;
-
-color: var(--accent);
-
-font-size: 20px;
-font-weight: 700;
-
-padding: 22px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 25px 20px 24px;
+  border-bottom: 1px solid #24435F;
 }
 
-.sidebar-brand-icon {
-font-size: 20px;
+.sidebar-brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  padding: 3px;
 }
 
-/* ===== Navigation ===== */
+.sidebar-brand-name {
+  color: #FFFFFF;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+  white-space: nowrap;
+}
+
+.sidebar-brand-accent {
+  color: #69C3E0;
+}
+
+/* Section Label */
+
+.sidebar-section-label {
+  padding: 22px 22px 10px;
+  color: #9FB4C8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+/* Navigation */
 
 .sidebar-nav {
-display: flex;
-flex-direction: column;
-
-gap: 5px;
-
-padding: 8px 12px;
-
-flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  flex: 1;
 }
 
 .sidebar-link {
-display: flex;
-align-items: center;
-
-gap: 12px;
-
-width: 100%;
-
-color: var(--text-muted);
-
-text-decoration: none;
-
-padding: 12px 14px;
-
-font-size: 14px;
-font-weight: 500;
-
-border-radius: var(--radius-sm);
-
-transition:
-background 0.15s ease,
-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  color: #C1CFDC;
+  text-decoration: none;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 7px;
+  border-left: 3px solid transparent;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .sidebar-link-icon {
-font-size: 16px;
-
-width: 18px;
-
-text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  min-width: 20px;
+  font-size: 18px;
+  line-height: 1;
+  color: #A9BDCE;
 }
-
-/* Hover */
 
 .sidebar-link:hover {
-background: #EAF6FB;
-
-color: var(--accent);
+  background: #204361;
+  color: #FFFFFF;
 }
 
-/* Active */
+.sidebar-link:hover .sidebar-link-icon {
+  color: #FFFFFF;
+}
 
 .sidebar-link.active {
-background: #E1F3FA;
-
-color: var(--accent);
-
-font-weight: 600;
+  background: #28516F;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-left-color: #69C3E0;
 }
 
-/* ===== Footer ===== */
+.sidebar-link.active .sidebar-link-icon {
+  color: #69C3E0;
+}
+
+/* Footer / Patient Profile */
 
 .sidebar-footer {
-display: flex;
-align-items: center;
-
-gap: 10px;
-
-padding: 16px 20px;
-
-border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 17px 20px;
+  border-top: 1px solid #24435F;
+  margin-top: auto;
 }
-
-/* User Avatar */
 
 .sidebar-avatar {
-width: 34px;
-height: 34px;
-
-border-radius: 50%;
-
-background: var(--accent);
-
-color: #FFFFFF;
-
-display: flex;
-align-items: center;
-justify-content: center;
-
-font-size: 13px;
-font-weight: 700;
-
-flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #28516F;
+  border: 1px solid #47728E;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-/* User Name */
+.sidebar-user-info {
+  min-width: 0;
+}
 
 .sidebar-user-name {
-color: var(--text);
-
-font-size: 13px;
-font-weight: 600;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
 }
-
-/* User Role */
 
 .sidebar-user-role {
-color: var(--text-muted);
-
-font-size: 11px;
+  color: #A9BDCE;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 2px 0 0;
 }
 
-/* ===== Responsive ===== */
+/* Focus Accessibility */
 
-@media (max-width: 1000px) {
-
-.sidebar {
-width: 200px;
-}
+.sidebar-link:focus-visible {
+  outline: 2px solid #69C3E0;
+  outline-offset: 3px;
 }
 
-@media (max-width: 700px) {
+/* Prevent Navigation Text Wrapping */
 
-.sidebar {
-width: 240px;
-}
+.sidebar-link span:last-child {
+  white-space: nowrap;
 }

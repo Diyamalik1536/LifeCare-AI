@@ -1,108 +1,131 @@
+/* ==============================
+   LifeCare AI - Patient Header
+   Doctor Portal Inspired
+================================ */
+
 .app-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
+  width: 100%;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 
-gap: 20px;
+  /* Colored header like Doctor Portal */
+  background: #DCE8F1;
 
-background: #FFFFFF;
-border: 1px solid var(--border);
-border-radius: var(--radius-lg);
+  padding: 16px 30px;
+  margin: 0 0 28px;
 
-padding: 16px 22px;
+  border: none;
+  border-bottom: 1px solid #CAD9E5;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.app-header h1 {
-font-size: 20px;
-font-weight: 700;
-color: var(--text);
+/* Header Title */
+
+.app-header > h1 {
+  flex: 0 0 auto;
+  color: #16324F;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 0;
 }
+
+/* Search */
 
 .app-header-search {
-flex: 1;
-max-width: 380px;
+  flex: 1;
+  width: 100%;
+  max-width: 390px;
+  min-width: 180px;
+  height: 42px;
 
-display: flex;
-align-items: center;
-gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-background: #F4FAFD;
-border: 1px solid var(--border);
-border-radius: var(--radius-sm);
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: 1px solid #CAD9E5;
+  border-radius: 8px;
 
-padding: 9px 14px;
+  transition: border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.app-header-search:focus-within {
+  border-color: #247BA0;
+  box-shadow: 0 0 0 3px rgba(36, 123, 160, 0.10);
 }
 
 .search-icon {
-font-size: 13px;
-color: var(--accent);
+  flex-shrink: 0;
+  font-size: 15px;
+  line-height: 1;
+  opacity: 0.7;
 }
 
 .app-header-search input {
-flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #243447;
+  font-size: 13px;
+  box-shadow: none;
+}
 
-background: transparent;
-border: none;
-outline: none;
-
-color: var(--text);
-
-font-size: 13px;
+.app-header-search input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .app-header-search input::placeholder {
-color: var(--text-muted);
+  color: #8796A5;
 }
 
+/* Patient Profile */
+
 .app-header-profile {
-display: flex;
-align-items: center;
-
-gap: 10px;
-
-white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-left: 22px;
+  border-left: 1px solid #B9CBD9;
 }
 
 .profile-avatar {
-width: 38px;
-height: 38px;
-
-border-radius: 50%;
-
-background: #E1F3FA;
-color: var(--accent);
-
-display: flex;
-align-items: center;
-justify-content: center;
-
-font-size: 16px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #CAD9E5;
+  font-size: 19px;
 }
 
 .profile-name {
-font-size: 14px;
-font-weight: 600;
-
-color: var(--text);
+  color: #16324F;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .profile-role {
-font-size: 12px;
-
-color: var(--text-muted);
-}
-
-/* Mobile */
-
-@media (max-width: 700px) {
-
-.app-header {
-flex-wrap: wrap;
-}
-
-.app-header-search {
-order: 3;
-max-width: 100%;
-width: 100%;
-}
+  color: #526A80;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 2px 0 0;
 }

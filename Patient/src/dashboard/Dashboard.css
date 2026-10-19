@@ -1,77 +1,131 @@
+/* ==============================
+   LifeCare AI - Patient Dashboard
+   Muted Professional Theme
+================================ */
+
 .dashboard {
-width: 100%;
-max-width: 1400px;
-margin: 0 auto;
-padding: 24px 30px 40px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px 36px;
+  color: #344457;
 }
+
+/* Welcome Section */
 
 .dashboard-welcome {
-margin-bottom: 24px;
+  margin: 0 0 24px;
 }
+
+.dashboard-welcome h1 {
+  color: #20364D;
+  font-size: 26px;
+  line-height: 1.4;
+  font-weight: 650;
+  letter-spacing: -0.4px;
+  margin-bottom: 5px;
+}
+
+.dashboard-welcome p {
+  color: #748193;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Statistics */
 
 .stats {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-
-gap: 20px;
-
-width: 100%;
-
-margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin-bottom: 24px;
 }
 
-.next-appointment {
-margin-bottom: 24px;
+.stats > * {
+  min-width: 0;
 }
+
+/* Dashboard Grid */
 
 .dashboard-grid {
-display: grid;
-grid-template-columns: 1.2fr 1fr;
-
-gap: 20px;
-
-width: 100%;
-
-margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+  width: 100%;
+  margin-bottom: 24px;
+  align-items: stretch;
 }
+
+.dashboard-grid > * {
+  min-width: 0;
+}
+
+/* Cards */
 
 .dashboard-card {
-background: #FFFFFF;
-
-border: 1px solid #D6EAF3;
-
-border-radius: 14px;
-
-padding: 22px;
+  min-width: 0;
+  background: #FFFFFF;
+  border: 1px solid #E1E7ED;
+  border-radius: 11px;
+  padding: 23px;
+  box-shadow: 0 1px 4px rgba(32, 54, 77, 0.025);
 }
+
+.dashboard-card h2,
+.dashboard-card h3 {
+  color: #20364D;
+  font-weight: 600;
+}
+
+/* Recent Appointments */
 
 .recent-section {
-width: 100%;
+  width: 100%;
+  margin-bottom: 8px;
 }
 
+/* Buttons */
+
+.dashboard .btn-primary {
+  background: #426780;
+  color: #FFFFFF;
+  border-color: #426780;
+}
+
+.dashboard .btn-primary:hover {
+  background: #35566E;
+  border-color: #35566E;
+}
+
+/* Tablet */
 
 @media (max-width: 1000px) {
+  .dashboard {
+    padding: 0 20px 30px;
+  }
 
-.dashboard {
-padding: 20px;
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.stats {
-grid-template-columns: 1fr;
-}
-
-.dashboard-grid {
-grid-template-columns: 1fr;
-}
-}
+/* Mobile */
 
 @media (max-width: 600px) {
+  .dashboard {
+    padding: 0 16px 24px;
+  }
 
-.dashboard {
-padding: 16px;
-}
+  .dashboard-card {
+    padding: 16px;
+  }
 
-.dashboard-card {
-padding: 16px;
-}
+  .dashboard-welcome h1 {
+    font-size: 23px;
+  }
 }

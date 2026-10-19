@@ -1,139 +1,253 @@
+
+/* =====================================
+   HEALTH RECORDS — SCOPED STYLES ONLY
+   Does not style the shared Header
+   or Sidebar
+   ===================================== */
+
 .records-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0px 30px 40px;
+  color: #344457;
+}
+
+/* Page heading */
+.records-page > .page-header {
+  margin: 0 0 26px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.records-page > .page-header h1 {
+  margin: 0 0 5px;
+  color: #20364D;
+  font-size: 26px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.4px;
+}
+
+.records-page > .page-header p {
+  margin: 0;
+  color: #748193;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Filters */
+.records-page .filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.records-page .filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 35px;
+  padding: 8px 15px;
+  color: #657487;
+  background: #FFFFFF;
+  border: 1px solid #DCE5ED;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.records-page .filter-chip:hover {
+  color: #20364D;
+  background: #F2F6F9;
+  border-color: #C8D4DF;
+}
+
+.records-page .filter-chip.active {
+  color: #FFFFFF;
+  background: #426780;
+  border-color: #426780;
+}
+
+/* Add report button */
+.records-page .add-report-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin: 0 0 21px;
+  padding: 10px 16px;
+  color: #FFFFFF;
+  background: #426780;
+  border: 1px solid #426780;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.records-page .add-report-btn:hover {
+  background: #35566E;
+  border-color: #35566E;
+}
+
+/* Records list */
+.records-page .records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
   width: 100%;
 }
 
-.filter-row {
-  display: flex;
-  gap: 8px;
-
-  margin-bottom: 18px;
-
-  flex-wrap: wrap;
-}
-
-.filter-chip {
-  background: #FFFFFF;
-
-  border: 1px solid var(--border);
-
-  color: var(--text-muted);
-
-  padding: 7px 16px;
-
-  border-radius: 20px;
-
-  font-size: 13px;
-
-  cursor: pointer;
-
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
-
-.filter-chip:hover {
-  background: #EEF8FC;
-
-  color: var(--accent);
-}
-
-.filter-chip.active {
-  background: #E1F3FA;
-
-  color: var(--accent);
-
-  border-color: var(--accent);
-}
-
-
-/* ===== Records List ===== */
-
-.records-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 12px;
-}
-
-.record-card {
-  padding: 16px 20px;
-
+/* Individual record card */
+.records-page .record-card {
   display: flex;
   align-items: center;
-
-  gap: 15px;
-
-  flex-wrap: wrap;
+  gap: 16px;
+  min-width: 0;
+  padding: 20px 22px;
+  background: #FFFFFF;
+  border: 1px solid #E1E7ED;
+  border-radius: 11px;
+  box-shadow: 0 2px 5px rgba(32, 54, 77, 0.025);
+  transition: border-color 0.18s ease;
 }
 
+.records-page .record-card:hover {
+  border-color: #CBD6E0;
+}
 
-/* ===== Record Icon ===== */
-
-.record-icon {
-  width: 44px;
-  height: 44px;
-
-  border-radius: 10px;
-
-  background: #E1F3FA;
-
-  color: var(--accent);
-
+/* Record icon */
+.records-page .record-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-size: 20px;
-
-  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  color: #426780;
+  background: #EDF2F6;
+  border: 1px solid #E2E9EF;
+  border-radius: 9px;
+  font-size: 21px;
 }
 
-
-/* ===== Record Info ===== */
-
-.record-info {
+/* Record information */
+.records-page .record-info {
   flex: 1;
-
-  min-width: 200px;
+  min-width: 0;
 }
 
-.record-info h3 {
-  color: var(--text);
-
-  font-size: 15px;
-  font-weight: 600;
+.records-page .record-info h3 {
+  margin: 0 0 5px;
+  color: #20364D;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.record-info p {
-  color: var(--text-muted);
-
-  font-size: 13px;
-
-  margin-top: 3px;
+.records-page .record-info p {
+  margin: 0;
+  color: #788697;
+  font-size: 12px;
+  line-height: 1.7;
 }
 
-.record-date {
-  color: var(--text-dim);
-
-  font-size: 13px;
-
+/* Record date */
+.records-page .record-date {
+  flex-shrink: 0;
+  color: #68788A;
+  font-size: 12px;
+  line-height: 1.6;
   white-space: nowrap;
 }
 
+/* View button */
+.records-page .record-card .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 8px 15px;
+  color: #40566A;
+  background: #FFFFFF;
+  border: 1px solid #D5DEE7;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-/* ===== Empty State ===== */
+.records-page .record-card .btn-secondary:hover {
+  color: #20364D;
+  background: #F1F5F8;
+  border-color: #BFCBD7;
+}
 
-.records-empty {
-  color: var(--text-muted);
-
-  font-size: 14px;
-
-  padding: 20px 0;
-
+/* Empty state */
+.records-page .records-empty {
+  padding: 35px 20px;
+  color: #788697;
+  background: #FFFFFF;
+  border: 1px dashed #D5DEE7;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
   text-align: center;
 }
 
-.add-report-btn {
-  margin-bottom: 20px;
+/* Keyboard focus */
+.records-page .filter-chip:focus-visible,
+.records-page .btn:focus-visible {
+  outline: 2px solid #6D9BB5;
+  outline-offset: 2px;
+}
+
+/* Existing responsive support */
+@media (max-width: 760px) {
+  .records-page {
+    padding: 22px 20px 30px;
+  }
+
+  .records-page .record-card {
+    flex-wrap: wrap;
+    gap: 13px;
+    padding: 17px;
+  }
+
+  .records-page .record-info {
+    flex: 1 1 calc(100% - 60px);
+  }
+
+  .records-page .record-date {
+    margin-left: 59px;
+  }
+}
+
+@media (max-width: 480px) {
+  .records-page {
+    padding: 20px 15px 26px;
+  }
+
+  .records-page > .page-header h1 {
+    font-size: 23px;
+  }
+
+  .records-page .record-card {
+    gap: 10px;
+  }
+
+  .records-page .record-date {
+    margin-left: 0;
+  }
 }

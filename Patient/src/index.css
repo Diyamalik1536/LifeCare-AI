@@ -93,17 +93,13 @@ a {
   min-height: 100vh;
   background: var(--bg);
 }
-
 .main-content {
   margin-left: 250px;
-
   width: calc(100% - 250px);
-
+  min-width: 0;
   min-height: 100vh;
-
-  padding: 20px 25px 40px;
+  padding: 0;
 }
-
 
 .page-header {
   margin: 25px 0 20px;

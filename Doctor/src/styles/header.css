@@ -1,88 +1,143 @@
+/* ============================= */
+/* LifeCare AI - Header Styles   */
+/* ============================= */
+
 .header {
-  background: #ffffff;
-  border-bottom: 1px solid #d6eaf3;
-  padding: 14px 28px;
+  background: #DCE8F1;
+  border-bottom: 1px solid #C3D4E2;
+  padding: 16px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
+  min-height: 82px;
+  box-shadow: 0 2px 5px rgba(22, 50, 79, 0.04);
 }
 
+/* Page Information */
 .header-title {
   font-size: 20px;
-  font-weight: 800;
-  color: #183b4a;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #16324F;
+  letter-spacing: -0.35px;
   margin: 0;
 }
 
 .header-subtitle {
-  color: #6b8794;
+  color: #526A80;
   font-size: 11px;
-  margin-top: 2px;
+  line-height: 1.5;
+  margin-top: 3px;
 }
 
+/* Right Side */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 22px;
 }
 
+/* Date Badge */
 .header-date {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #eef7fd;
-  color: #2498d1;
-  padding: 7px 11px;
-  border-radius: 8px;
+  gap: 8px;
+  background: #F7FAFC;
+  border: 1px solid #C8D7E3;
+  color: #344E65;
+  padding: 9px 13px;
+  border-radius: 7px;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .header-date-icon {
-  font-size: 14px;
+  font-size: 15px;
+  color: #247BA0;
 }
 
+/* Doctor Profile */
 .header-doctor {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding-left: 20px;
+  border-left: 1px solid #B9CBD9;
 }
 
 .header-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #eef7fd;
-  color: #2498d1;
+  width: 39px;
+  height: 39px;
+  border-radius: 9px;
+  background: #16324F;
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 12px;
+  flex-shrink: 0;
+  border: 1px solid #244B6B;
 }
 
 .header-doctor-name {
   font-size: 12px;
+  line-height: 1.5;
   font-weight: 700;
-  color: #183b4a;
+  color: #16324F;
   margin: 0;
 }
 
 .header-doctor-role {
-  font-size: 10px;
-  color: #64748b;
+  font-size: 11px;
+  color: #526A80;
   margin: 2px 0 0;
 }
 
+/* Tablet */
+@media (max-width: 1100px) {
+  .header {
+    padding: 15px 24px;
+  }
+
+  .header-right {
+    gap: 14px;
+  }
+
+  .header-doctor {
+    padding-left: 12px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 600px) {
   .header {
-    padding: 12px 16px;
+    padding: 14px 16px;
+    align-items: flex-start;
   }
 
   .header-right {
     width: 100%;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .header-doctor {
+    padding-left: 10px;
+  }
+
+  .header-date {
+    font-size: 11px;
+    padding: 7px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    scroll-behavior: auto;
   }
 }
