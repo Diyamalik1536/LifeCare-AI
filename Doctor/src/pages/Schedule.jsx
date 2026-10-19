@@ -1,36 +1,43 @@
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { MdOutlineCalendarToday } from 'react-icons/md'
 import { FaRegCircleCheck } from 'react-icons/fa6'
 import { AiOutlineClockCircle } from 'react-icons/ai'
+
 import Header from '../components/Header.jsx'
 import StatCard from '../components/StatCard.jsx'
 import AppointmentItem from '../components/AppointmentItem.jsx'
-import { appointments as initialAppointments } from '../data/appointments.js'
+
+import { updateAppointmentStatus } from '../store/appointmentsSlice.js'
 import '../styles/schedule.css'
 
 function Schedule() {
-  const [appointments, setAppointments] = useState(initialAppointments)
+  const dispatch = useDispatch()
+
+  const appointments = useSelector(
+    (state) => state.appointments
+  )
 
   function updateAppointment(id, newStatus) {
-    setAppointments(
-      appointments.map((item) =>
-        item.id === id ? { ...item, status: newStatus } : item
-      )
+    dispatch(
+      updateAppointmentStatus({ id, newStatus })
     )
   }
 
   const total = appointments.length
+
   const completed = appointments.filter(
-    (a) => a.status === 'Completed'
+    (appointment) => appointment.status === 'Completed'
   ).length
-  const remaining = total - completed
+
+  const remaining = appointments.filter(
+    (appointment) => appointment.status === 'Pending'
+  ).length
 
   return (
     <div>
       <Header pageTitle="Schedule" />
 
       <div className="page-inner">
-
         <div className="schedule-top">
           <div>
             <p className="eyebrow-text">GOOD MORNING, DOCTOR</p>
@@ -71,7 +78,9 @@ function Schedule() {
 
         <div className="appointments-card">
           <h3 className="card-title">Appointments</h3>
-          <p className="card-subtitle">Today's patient appointments</p>
+          <p className="card-subtitle">
+            Today's patient appointments
+          </p>
 
           <div className="appointments-list">
             {appointments.map((item) => (
@@ -83,7 +92,6 @@ function Schedule() {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   )

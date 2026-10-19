@@ -1,15 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
 import App from './App.jsx'
+import store from './store/store.js'
+import { DoctorProvider } from './context/DoctorContext.jsx'
+
 import './styles/global.css'
 
-// This is the entry point of the app
-// It renders the App component inside the root div in index.html
+// Entry point of the Doctor portal
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <DoctorProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </DoctorProvider>
+    </Provider>
   </React.StrictMode>,
 )
