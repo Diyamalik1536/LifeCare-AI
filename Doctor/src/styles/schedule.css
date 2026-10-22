@@ -149,6 +149,10 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .today-date-card {
+    width: 100%;
+  }
+
   .schedule-top {
     flex-direction: column;
     align-items: flex-start;
