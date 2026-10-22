@@ -1,4 +1,3 @@
-
 /* =========================================
    LIFECARE AI — PATIENT APPOINTMENTS
    Clean, professional Doctor Portal styling
@@ -588,7 +587,7 @@
 
 @media (max-width: 650px) {
   .appointments-page {
-    padding: 20px 16px 28px;
+    padding: 8px 14px 28px;
   }
 
   .appointments-page .appt-page-header {
