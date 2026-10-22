@@ -95,3 +95,9 @@
     flex-direction:column;
   }
 }
+
+@media (max-width:480px){
+  .prescription-card{
+    padding:12px;
+  }
+}
