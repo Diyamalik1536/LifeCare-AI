@@ -44,3 +44,11 @@
 
   margin-bottom: 14px;
 }
+
+@media (max-width: 480px) {
+  .health-alert {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+}
