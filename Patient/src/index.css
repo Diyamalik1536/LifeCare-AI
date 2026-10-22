@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -35,20 +36,11 @@
 }
 
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
-
 html,
 body,
 #root {
   width: 100%;
   min-height: 100vh;
-}
-
-img,
-svg {
-  max-width: 100%;
 }
 
 body {
@@ -76,7 +68,6 @@ h4,
 h5,
 h6 {
   color: var(--text);
-  overflow-wrap: break-word;
 }
 
 p {
@@ -272,34 +263,34 @@ textarea:focus {
   background: transparent;
 }
 
-/* ==============================
-   Responsive shell
-   - >900px : fixed 250px sidebar
-   - <=900px: sidebar becomes a drawer,
-              a 56px top bar appears
-================================ */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
+
   .main-content {
-    margin-left: 0;
-    width: 100%;
-    padding-top: calc(56px + env(safe-area-inset-top));
+    margin-left: 200px;
+
+    width: calc(100% - 200px);
+
+    padding: 18px;
   }
 }
 
-@media (max-width: 600px) {
-  .page-header h1 {
-    font-size: 23px;
+
+@media (max-width: 700px) {
+
+  .sidebar {
+    transform: translateX(-100%);
   }
 
-  /* 16px inputs stop iOS Safari from zooming the page on focus */
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
+  .sidebar.open {
+    transform: translateX(0);
   }
 
-  .btn {
-    min-height: 40px;
+  .main-content {
+    margin-left: 0;
+
+    width: 100%;
+
+    padding: 15px;
   }
 }
 

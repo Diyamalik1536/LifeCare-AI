@@ -1,30 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Header from '../components/Header.jsx'
 import ConsultationItem from '../components/ConsultationItem.jsx'
-import { consultations as initialConsultations } from '../data/consultations.js'
+import { useDoctor } from '../context/DoctorContext.jsx'
+import { sortQueue, getInitials } from '../queue/queueUtils.js'
+import { saveConsultation } from '../store/appointmentsSlice.js'
 import '../styles/consultations.css'
 
 function Consultations() {
-  const [consultations, setConsultations] = useState(initialConsultations)
-  const [selectedId, setSelectedId] = useState(initialConsultations[0].id)
+  const dispatch = useDispatch()
+  const doctor = useDoctor()
+  const items = useSelector((state) => state.appointments.items)
 
-  const selectedConsultation = consultations.find(
-    (c) => c.id === selectedId
+  // Every patient who booked this doctor (cancelled ones excluded), in queue order
+  const consultations = useMemo(
+    () => sortQueue(items.filter((i) => i.doctor === doctor.name && i.status !== 'Cancelled')),
+    [items, doctor.name]
   )
 
-  function updateField(field, value) {
-    const updatedList = consultations.map((c) => {
-      if (c.id === selectedId) {
-        return { ...c, [field]: value }
-      }
-      return c
-    })
+  const [selectedId, setSelectedId] = useState(null)
+  const [draft, setDraft] = useState(null)
 
-    setConsultations(updatedList)
+  const selectedConsultation =
+    consultations.find((c) => c.id === selectedId) || consultations[0] || null
+
+  // Load the form whenever another patient is selected
+  const currentId = selectedConsultation?.id
+  useEffect(() => {
+    if (selectedConsultation) {
+      setDraft({
+        symptoms: selectedConsultation.symptoms || '',
+        diagnosis: selectedConsultation.diagnosis || '',
+        treatmentPlan: selectedConsultation.treatmentPlan || '',
+        notes: selectedConsultation.notes || '',
+      })
+    } else {
+      setDraft(null)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentId])
+
+  function updateField(field, value) {
+    setDraft((current) => ({ ...current, [field]: value }))
   }
 
   function handleSave() {
-    alert("Consultation saved for " + selectedConsultation.patient)
+    dispatch(saveConsultation({ id: selectedConsultation.id, ...draft }))
+    alert('Consultation saved for ' + selectedConsultation.patientName)
   }
 
   return (
@@ -38,6 +60,13 @@ function Consultations() {
           Record diagnosis, treatment plans and consultation notes.
         </p>
 
+        {!selectedConsultation || !draft ? (
+          <div className="consultation-list-card">
+            <p className="card-subtitle">
+              No patients yet. When a patient books an appointment with {doctor.name}, they appear here.
+            </p>
+          </div>
+        ) : (
         <div className="consultations-main">
           <div className="consultation-list-card">
             <h3 className="card-title">Consultation List</h3>
@@ -48,7 +77,7 @@ function Consultations() {
                 <ConsultationItem
                   key={item.id}
                   consultation={item}
-                  isActive={item.id === selectedId}
+                  isActive={item.id === selectedConsultation.id}
                   onClick={() => setSelectedId(item.id)}
                 />
               ))}
@@ -58,28 +87,28 @@ function Consultations() {
           <div className="current-patient-card">
             <div className="current-patient-header">
               <div className="current-patient-avatar">
-                {selectedConsultation.initials}
+                {getInitials(selectedConsultation.patientName)}
               </div>
 
               <div className="current-patient-info">
                 <p className="current-patient-label">Current Patient</p>
                 <h3 className="current-patient-name">
-                  {selectedConsultation.patient}
+                  {selectedConsultation.patientName}
                 </h3>
                 <p className="current-patient-symptoms-preview">
-                  {selectedConsultation.symptoms}
+                  {draft.symptoms || 'No symptoms provided'}
                 </p>
               </div>
 
               <span className="consultation-status">
-                {selectedConsultation.status}
+                {selectedConsultation.queueStatus === 'In Consultation' ? 'In Consultation' : selectedConsultation.status}
               </span>
             </div>
 
             <div className="form-field">
               <label className="form-label">Symptoms</label>
               <textarea
-                value={selectedConsultation.symptoms}
+                value={draft.symptoms}
                 onChange={(e) => updateField("symptoms", e.target.value)}
                 placeholder="Enter symptoms..."
               />
@@ -88,7 +117,7 @@ function Consultations() {
             <div className="form-field">
               <label className="form-label">Diagnosis</label>
               <textarea
-                value={selectedConsultation.diagnosis}
+                value={draft.diagnosis}
                 onChange={(e) => updateField("diagnosis", e.target.value)}
                 placeholder="Enter diagnosis..."
               />
@@ -97,7 +126,7 @@ function Consultations() {
             <div className="form-field">
               <label className="form-label">Treatment Plan</label>
               <textarea
-                value={selectedConsultation.treatmentPlan}
+                value={draft.treatmentPlan}
                 onChange={(e) => updateField("treatmentPlan", e.target.value)}
                 placeholder="Enter treatment plan..."
               />
@@ -106,7 +135,7 @@ function Consultations() {
             <div className="form-field">
               <label className="form-label">Consultation Notes</label>
               <textarea
-                value={selectedConsultation.notes}
+                value={draft.notes}
                 onChange={(e) => updateField("notes", e.target.value)}
                 placeholder="Enter consultation notes..."
               />
@@ -120,6 +149,7 @@ function Consultations() {
             </button>
           </div>
         </div>
+        )}
       </div>
     </div>
   )

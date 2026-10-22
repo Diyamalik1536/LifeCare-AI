@@ -137,33 +137,3 @@
 .recent-manage-link:hover {
   text-decoration: underline;
 }
-
-@media (max-width: 600px) {
-  .recent-appointments {
-    padding: 16px 14px;
-  }
-
-  .recent-item {
-    gap: 10px 12px;
-    padding: 12px;
-  }
-
-  /* Name takes the rest of the first row; date/time + status sit below it */
-  .recent-item-info {
-    flex: 1 1 calc(100% - 60px);
-    min-width: 0;
-  }
-
-  .recent-item-datetime {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2px 14px;
-    flex: 1 1 auto;
-    min-width: 0;
-    margin-left: 52px;
-  }
-
-  .recent-item .status-pill {
-    margin-left: auto;
-  }
-}

@@ -16,8 +16,7 @@
 
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px 10px;
+  gap: 10px;
 }
 
 .welcome-card p {
@@ -59,15 +58,5 @@
 
   100% {
     transform: rotate(0deg);
-  }
-}
-
-@media (max-width: 600px) {
-  .welcome-card {
-    padding: 18px 16px;
-  }
-
-  .welcome-card h2 {
-    font-size: 20px;
   }
 }

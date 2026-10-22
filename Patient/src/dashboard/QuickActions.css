@@ -107,17 +107,3 @@
   font-size: 12px;
   line-height: 1.5;
 }
-
-@media (max-width: 600px) {
-  .quick-actions {
-    padding: 16px 14px;
-  }
-
-  .quick-action-btn {
-    min-height: 44px;
-  }
-
-  .quick-book-row {
-    flex-direction: column;
-  }
-}

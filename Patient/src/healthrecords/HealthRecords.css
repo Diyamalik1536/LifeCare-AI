@@ -1,3 +1,4 @@
+
 /* =====================================
    HEALTH RECORDS — SCOPED STYLES ONLY
    Does not style the shared Header
@@ -213,16 +214,9 @@
 }
 
 /* Existing responsive support */
-@media (max-width: 900px) {
-  .records-page {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-}
-
 @media (max-width: 760px) {
   .records-page {
-    padding: 8px 20px 30px;
+    padding: 22px 20px 30px;
   }
 
   .records-page .record-card {
@@ -237,21 +231,12 @@
 
   .records-page .record-date {
     margin-left: 59px;
-    white-space: normal;
   }
 }
 
 @media (max-width: 480px) {
   .records-page {
-    padding: 8px 14px 26px;
-  }
-
-  .records-page .add-report-btn {
-    width: 100%;
-  }
-
-  .records-page .record-card .btn-secondary {
-    width: 100%;
+    padding: 20px 15px 26px;
   }
 
   .records-page > .page-header h1 {

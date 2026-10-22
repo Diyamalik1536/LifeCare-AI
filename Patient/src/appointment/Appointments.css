@@ -1,3 +1,4 @@
+
 /* =========================================
    LIFECARE AI — PATIENT APPOINTMENTS
    Clean, professional Doctor Portal styling
@@ -587,7 +588,7 @@
 
 @media (max-width: 650px) {
   .appointments-page {
-    padding: 8px 14px 28px;
+    padding: 20px 16px 28px;
   }
 
   .appointments-page .appt-page-header {
@@ -678,4 +679,29 @@
     padding: 7px 9px;
     font-size: 11px;
   }
+}
+
+
+/* ---------- Queue ---------- */
+.appointments-page .queue-badge {
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #eef7fd;
+  color: #1d6483;
+  font-size: 12px;
+  font-weight: 600;
+}
+.appointments-page .queue-badge.next { background: #fef3c7; color: #92400e; }
+.appointments-page .queue-badge.serving { background: #dcfce7; color: #15803d; }
+.appointments-page .book-form textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid #d6eaf3;
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+  box-sizing: border-box;
 }

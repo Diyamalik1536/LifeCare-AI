@@ -9,7 +9,7 @@ import "./Dashboard.css";
 
 function Dashboard({ appointments }) {
   const activeAppointments = appointments.filter((appointment) =>
-    ["Pending", "Confirmed", "Upcoming"].includes(appointment.status)
+    ["Pending", "Confirmed"].includes(appointment.status)
   ).length;
 
   return (

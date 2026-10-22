@@ -1,5 +1,4 @@
 
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,11 +9,9 @@ import Messages from "./messages/Messages";
 
 import {
   addAppointment,
-  updateAppointment,
+  rescheduleAppointment,
   cancelAppointment,
 } from "./store/appointmentsSlice";
-
-const STORAGE_KEY = "lifecare_patient_appointments";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,27 +20,12 @@ function App() {
     (state) => state.appointments.items
   );
 
-  // Save Redux appointments to LocalStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(appointments)
-      );
-    } catch (error) {
-      console.error(
-        "Could not save appointments to localStorage:",
-        error
-      );
-    }
-  }, [appointments]);
-
   const handleAddAppointment = (appointment) => {
     dispatch(addAppointment(appointment));
   };
 
-  const handleUpdateAppointment = (id, updates) => {
-    dispatch(updateAppointment({ id, updates }));
+  const handleRescheduleAppointment = (id, date, time) => {
+    dispatch(rescheduleAppointment({ id, date, time }));
   };
 
   const handleCancelAppointment = (id) => {
@@ -64,7 +46,7 @@ function App() {
             <Appointments
               appointments={appointments}
               addAppointment={handleAddAppointment}
-              updateAppointment={handleUpdateAppointment}
+              rescheduleAppointment={handleRescheduleAppointment}
               cancelAppointment={handleCancelAppointment}
             />
           }

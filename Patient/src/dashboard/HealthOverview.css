@@ -10,8 +10,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 4px 12px;
 
   margin-bottom: 16px;
 }
@@ -83,7 +81,6 @@
 
 .vital-info {
   flex: 1;
-  min-width: 0;
 }
 
 .vital-label {
@@ -120,15 +117,4 @@
   font-weight: 600;
 
   white-space: nowrap;
-}
-
-@media (max-width: 600px) {
-  .health-overview {
-    padding: 16px 14px;
-  }
-
-  .vital-item {
-    gap: 10px;
-    padding: 10px 12px;
-  }
 }

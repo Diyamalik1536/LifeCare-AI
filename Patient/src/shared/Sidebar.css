@@ -6,8 +6,6 @@
 .sidebar {
   width: 250px;
   height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
   background: #16324F;
   color: #FFFFFF;
   position: fixed;
@@ -16,8 +14,8 @@
   display: flex;
   flex-direction: column;
   border-right: 1px solid #24435F;
-  z-index: 120;
-  transition: transform 0.25s ease;
+  z-index: 100;
+  transition: width 0.2s ease;
 }
 
 /* Brand / Logo */
@@ -50,32 +48,6 @@
 
 .sidebar-brand-accent {
   color: #69C3E0;
-}
-
-.sidebar-close-btn {
-  display: none;
-  margin-left: auto;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  color: #C1CFDC;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.sidebar-close-btn:hover {
-  background: #204361;
-  color: #FFFFFF;
-}
-
-/* Mobile top bar + overlay (hidden on desktop) */
-.mobile-topbar,
-.sidebar-overlay {
-  display: none;
 }
 
 /* Section Label */
@@ -203,102 +175,4 @@
 
 .sidebar-link span:last-child {
   white-space: nowrap;
-}
-
-/* ==============================
-   Tablet + Mobile: off-canvas
-   drawer opened from a top bar
-================================ */
-@media (max-width: 900px) {
-  .mobile-topbar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 56px;
-    padding: 0 12px;
-    padding-top: env(safe-area-inset-top);
-    box-sizing: content-box;
-    background: #16324F;
-    border-bottom: 1px solid #24435F;
-    color: #FFFFFF;
-    z-index: 90;
-  }
-
-  .mobile-menu-btn {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
-    color: #FFFFFF;
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  .mobile-menu-btn:hover {
-    background: #24435F;
-  }
-
-  .mobile-topbar-logo {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    background: #FFFFFF;
-    padding: 2px;
-    object-fit: contain;
-  }
-
-  .mobile-topbar-title {
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-
-  .sidebar {
-    width: min(280px, 85vw);
-    transform: translateX(-100%);
-    visibility: hidden;
-    transition: transform 0.25s ease, visibility 0s linear 0.25s;
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-    visibility: visible;
-    box-shadow: 8px 0 30px rgba(10, 25, 41, 0.35);
-    transition: transform 0.25s ease, visibility 0s linear 0s;
-  }
-
-  .sidebar-close-btn {
-    display: flex;
-  }
-
-  .sidebar-overlay {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 25, 41, 0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-    z-index: 110;
-  }
-
-  .sidebar-overlay-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sidebar,
-  .sidebar-overlay {
-    transition: none;
-  }
 }

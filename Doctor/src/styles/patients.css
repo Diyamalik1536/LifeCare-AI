@@ -77,19 +77,15 @@
   gap: 24px;
 }
 
-.patients-grid > * {
-  min-width: 0;
-}
-
 .no-results-text {
   text-align: center;
   color: #64748B;
   padding: 30px 0;
 }
 
-/* Narrow desktop (sidebar visible) and phones: one card per row */
-@media (min-width: 901px) and (max-width: 1100px),
-  (max-width: 620px) {
+/* Tablet */
+
+@media (max-width: 950px) {
   .patients-grid {
     grid-template-columns: 1fr;
   }
@@ -98,12 +94,12 @@
 /* Mobile */
 
 @media (max-width: 600px) {
-  .patients-records-card {
-    padding: 16px;
+  .patients-grid {
+    grid-template-columns: 1fr;
   }
 
-  .patients-grid {
-    gap: 16px;
+  .patients-records-card {
+    padding: 18px;
   }
 
   .patients-top {
