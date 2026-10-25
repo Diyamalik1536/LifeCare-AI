@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Header from "../shared/Header";
 import Sidebar from "../shared/Sidebar";
+import { getQueueInfo, getLocalDateString, sortQueue } from "../queue/queueUtils";
 import "./Appointments.css";
 
 const DOCTORS = [
@@ -34,10 +35,24 @@ function formatTime(timeValue) {
   return date.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
 }
 
-function getLocalDateString() {
-  const now = new Date();
-  const offset = now.getTimezoneOffset();
-  return new Date(now.getTime() - offset * 60000).toISOString().slice(0, 10);
+function QueueBadge({ item, info }) {
+  if (item.token == null) return null;
+  let text = `Queue token #${item.token}`;
+  let cls = "queue-badge";
+  if (info) {
+    if (info.inConsultation) {
+      text += " · It's your turn — in consultation now";
+      cls += " serving";
+    } else if (info.ahead === 0) {
+      text += " · You are next";
+      cls += " next";
+    } else {
+      text += ` · ${info.ahead} patient${info.ahead === 1 ? "" : "s"} ahead of you`;
+    }
+    if (info.nowServing && !info.inConsultation) text += ` · Now serving #${info.nowServing}`;
+  } else if (item.status === "Completed") text += " · Consultation done";
+  else if (item.status === "Cancelled") text += " · Left the queue";
+  return <p className={cls}>🎟️ {text}</p>;
 }
 
 // Position of a pending request in the doctor's queue (first come, first served)
@@ -50,7 +65,7 @@ function getQueuePosition(appointment, appointments) {
   ).length;
 }
 
-function Appointments({ appointments, addAppointment, updateAppointment, cancelAppointment }) {
+function Appointments({ appointments, addAppointment, updateAppointment, rescheduleAppointment, cancelAppointment }) {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [editingId, setEditingId] = useState(null);
@@ -63,6 +78,7 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
     date: "",
     time: "",
     mode: "Hospital Visit",
+    symptoms: "",
   });
   const [editForm, setEditForm] = useState({ date: "", time: "" });
 
@@ -70,11 +86,9 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
     const filtered = activeFilter === "All"
       ? appointments
       : appointments.filter((appointment) => appointment.status === activeFilter);
-    return [...filtered].sort((a, b) => {
-      if (a.status === "Cancelled" && b.status !== "Cancelled") return 1;
-      if (b.status === "Cancelled" && a.status !== "Cancelled") return -1;
-      return `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`);
-    });
+    const closed = (item) => item.status === "Cancelled" || item.status === "Completed";
+    // open appointments first (by date, then queue token), closed ones last
+    return sortQueue(filtered).sort((a, b) => Number(closed(a)) - Number(closed(b)));
   }, [appointments, activeFilter]);
 
   const setField = (field, value) => {
@@ -90,7 +104,7 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
   };
 
   const resetForm = () => {
-    setForm({ patientName: "", doctor: "", specialization: "", date: "", time: "", mode: "Hospital Visit" });
+    setForm({ patientName: "", doctor: "", specialization: "", date: "", time: "", mode: "Hospital Visit", symptoms: "" });
   };
 
   const handleBook = (event) => {
@@ -125,6 +139,7 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
     setShowBookingForm(false);
     setActiveFilter("All");
     setMessage("Request sent to the doctor. Status: Pending until the doctor accepts or rejects it.");
+    setMessage("You have joined the queue. The doctor will see your request now.");
   };
 
   const startReschedule = (appointment) => {
@@ -161,8 +176,9 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
 
     // Rescheduling puts the request at the end of the doctor's queue again
     updateAppointment(appointment.id, { ...editForm, status: "Pending", requestedAt: Date.now() });
+    rescheduleAppointment(appointment.id, editForm.date, editForm.time);
     setEditingId(null);
-    setMessage("Appointment rescheduled. Its status is now Pending confirmation.");
+    setMessage("Appointment rescheduled. You are now at the end of the queue for the new date.");
   };
 
   const handleCancel = (appointment) => {
@@ -206,7 +222,7 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
               <div className="form-heading">
                 <div>
                   <h2>Book a new appointment</h2>
-                  <p>Choose a doctor and an available date and time.</p>
+                  <p>You will be added to the end of the doctor's queue for that day.</p>
                 </div>
                 <span className="form-step">NEW BOOKING</span>
               </div>
@@ -265,6 +281,17 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
                 </label>
               </div>
 
+              <label className="booking-mode-field">
+                Reason / symptoms (shown to the doctor)
+                <textarea
+                  value={form.symptoms}
+                  onChange={(event) => setField("symptoms", event.target.value)}
+                  placeholder="e.g. fever since 2 days, headache"
+                  rows={2}
+                  maxLength={300}
+                />
+              </label>
+
               <div className="booking-form-footer">
                 <p><span className="required-mark">*</span> Required fields</p>
                 <button className="btn btn-primary" type="submit">Confirm Booking</button>
@@ -311,6 +338,7 @@ function Appointments({ appointments, addAppointment, updateAppointment, cancelA
                     {appointment.status === "Rejected" && (
                       <p className="queue-note rejected">The doctor could not accept this request. Please book another slot.</p>
                     )}
+                    <QueueBadge item={appointment} info={getQueueInfo(appointments, appointment)} />
                     {appointment.patientName && appointment.patientName !== "User" && (
                       <p className="patient-name">Patient: {appointment.patientName}</p>
                     )}

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import appointmentsReducer from './appointmentsSlice.js'
+import appointmentsReducer, { hydrateQueue } from './appointmentsSlice.js'
+import { saveLocalQueue, connectBridge } from '../queue/sharedStorage.js'
 
 const store = configureStore({
   reducer: {
@@ -7,15 +8,21 @@ const store = configureStore({
   },
 })
 
+let lastItems = store.getState().appointments.items
+
+const bridge = connectBridge((remoteItems) => {
+  store.dispatch(hydrateQueue(remoteItems))
+  const merged = store.getState().appointments.items
+  if (JSON.stringify(merged) !== JSON.stringify(remoteItems)) bridge.push(merged)
+})
+
+// Every Redux change -> localStorage + shared queue (visible to the patient portal)
 store.subscribe(() => {
-  try {
-    localStorage.setItem(
-      'doctorAppointments',
-      JSON.stringify(store.getState().appointments)
-    )
-  } catch (error) {
-    console.error('Could not save appointments:', error)
-  }
+  const items = store.getState().appointments.items
+  if (items === lastItems) return
+  lastItems = items
+  saveLocalQueue(items)
+  bridge.push(items)
 })
 
 export default store

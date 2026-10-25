@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { getQueueInfo } from "../queue/queueUtils";
 import "./RecentAppointments.css";
 
 function formatDate(dateValue) {
@@ -20,7 +21,8 @@ function formatTime(timeValue) {
 
 function RecentAppointments({ appointments }) {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? appointments : appointments.slice(0, 3);
+  const sorted = [...appointments].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const visible = showAll ? sorted : sorted.slice(0, 3);
   const statusClass = {
     Upcoming: "upcoming",
     Pending: "pending",
@@ -48,6 +50,17 @@ function RecentAppointments({ appointments }) {
             <div className="recent-item-info">
               <h4>{appointment.doctor}</h4>
               <p>{appointment.specialization}</p>
+              {appointment.token != null && (
+                <p style={{ color: "#1d6483", fontWeight: 600 }}>
+                  🎟️ Token #{appointment.token}
+                  {(() => {
+                    const info = getQueueInfo(appointments, appointment);
+                    if (!info) return "";
+                    if (info.inConsultation) return " · Your turn now";
+                    return info.ahead === 0 ? " · You are next" : ` · ${info.ahead} ahead`;
+                  })()}
+                </p>
+              )}
             </div>
             <div className="recent-item-datetime">
               <span>📅 {formatDate(appointment.date)}</span>

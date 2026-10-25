@@ -26,6 +26,12 @@
 /* Base */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 body {
@@ -36,6 +42,15 @@ body {
   font-size: 14px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Long words / emails should wrap instead of stretching the layout */
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
 }
 
 /* Links */
@@ -68,6 +83,13 @@ a:focus-visible {
   min-width: 0;
   margin-left: 260px;
   min-height: 100vh;
+}
+
+/* Shared form controls */
+input,
+select,
+textarea {
+  max-width: 100%;
 }
 
 /* Page Spacing */
@@ -176,7 +198,9 @@ a:focus-visible {
   box-shadow: 0 2px 8px rgba(22, 50, 79, 0.025);
 }
 
-/* Responsive Layout */
+/* ============================= */
+/* Responsive Layout             */
+/* ============================= */
 @media (max-width: 1100px) {
   .page-inner {
     padding: 26px 24px;
@@ -187,9 +211,11 @@ a:focus-visible {
   }
 }
 
+/* Tablet + mobile: sidebar becomes a drawer, a 56px top bar appears */
 @media (max-width: 900px) {
   .page-content {
     margin-left: 0;
+    padding-top: calc(56px + env(safe-area-inset-top));
   }
 
   .page-inner {
@@ -206,7 +232,34 @@ a:focus-visible {
     font-size: 23px;
   }
 
+  .page-subheading {
+    font-size: 13px;
+  }
+
   .appointments-card {
     padding: 17px;
+  }
+
+  /* 16px inputs stop iOS Safari from zooming the page on focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Comfortable touch targets */
+  .btn {
+    min-height: 40px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .page-inner {
+    padding: 16px 12px;
+  }
+
+  .page-heading {
+    font-size: 21px;
   }
 }

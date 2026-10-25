@@ -7,11 +7,13 @@
   align-items: center;
   gap: 11px;
   flex: 1;
+  min-width: 0;
 }
 
 .stat-card-icon {
   width: 38px;
   height: 38px;
+  flex-shrink: 0;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -36,6 +38,7 @@
 .appointment-item {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 11px;
   padding: 12px 0;
   border-bottom: 1px solid #d6eaf3;
@@ -48,6 +51,7 @@
 .appointment-dot {
   width: 7px;
   height: 7px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #d6eaf3;
 }
@@ -68,6 +72,7 @@
 .appointment-avatar {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #eef7fd;
   color: #2498d1;
@@ -79,7 +84,8 @@
 }
 
 .appointment-info {
-  flex: 1;
+  flex: 1 1 140px;
+  min-width: 0;
 }
 
 .appointment-name {
@@ -99,6 +105,7 @@
   font-size: 10px;
   padding: 5px 9px;
   border-radius: 20px;
+  white-space: nowrap;
 }
 
 .status-waiting {
@@ -229,6 +236,10 @@
   font-size: 12px;
 }
 
+.patient-card {
+  min-width: 0;
+}
+
 .patient-condition-tag {
   display: inline-block;
   background: #eef7fd;
@@ -249,6 +260,7 @@
 .detail-item {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .detail-label {
@@ -281,11 +293,14 @@
   margin: 0;
   color: #475569;
   font-size: 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .patient-contact svg {
   color: #2498d1;
   font-size: 12px;
+  flex-shrink: 0;
 }
 
 .next-appointment-box {
@@ -321,8 +336,9 @@
 .consultation-avatar {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: #ddef fb;
+  background: #ddeffb;
   color: #2498d1;
   display: flex;
   align-items: center;
@@ -333,6 +349,7 @@
 
 .consultation-info {
   flex: 1;
+  min-width: 0;
 }
 
 .consultation-name {
@@ -351,6 +368,7 @@
 .consultation-status {
   font-size: 10px;
   color: #64748b;
+  white-space: nowrap;
 }
 
 .prescription-card {
@@ -365,6 +383,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .prescription-header-left {
@@ -376,6 +396,7 @@
 .prescription-avatar {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #eef7fd;
   color: #2498d1;
@@ -416,9 +437,14 @@
   margin-top: 10px;
 }
 
+.medicine-row > div:last-child {
+  min-width: 0;
+}
+
 .medicine-number {
   width: 22px;
   height: 22px;
+  flex-shrink: 0;
   border-radius: 6px;
   background: #eef7fd;
   color: #2498d1;
@@ -443,13 +469,10 @@
   margin: 2px 0 0;
 }
 
+/* Tablet / phone: patient details stay 2-up until phones get small */
 @media (max-width: 768px) {
   .patient-card {
     padding: 16px;
-  }
-
-  .patient-details-grid {
-    grid-template-columns: 1fr;
   }
 
   .patient-avatar {
@@ -462,3 +485,56 @@
     font-size: 15px;
   }
 }
+
+@media (max-width: 640px) {
+  /* Appointment rows: time + avatar + name on the first line,
+     status + button wrap neatly onto the second line */
+  .appointment-dot {
+    display: none;
+  }
+
+  .appointment-time {
+    min-width: 62px;
+  }
+
+  .appointment-item .status-badge {
+    margin-left: 0;
+  }
+
+  .appointment-item .btn {
+    margin-left: auto;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .patient-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prescription-card {
+    padding: 12px;
+  }
+}
+
+/* ---------- Queue ---------- */
+.queue-token {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 46px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #eef7fd;
+  color: #1d6483;
+}
+.queue-token-label { font-size: 8px; letter-spacing: 0.08em; font-weight: 700; }
+.queue-token-number { font-size: 15px; font-weight: 800; }
+.appointment-item-active { background: #f0f9ff; border-radius: 10px; padding-left: 10px; padding-right: 10px; }
+.appointment-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.status-cancelled { background: #fee2e2; color: #b91c1c; }
+.btn-reject { color: #b91c1c; border-color: #fecaca; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }

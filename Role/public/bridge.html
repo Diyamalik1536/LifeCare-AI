@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>LifeCare queue bridge</title></head>
+<body>
+<script>
+// LifeCare AI - localStorage bridge (no backend).
+// Patient (5174) and Doctor (5175) run on different origins, so they cannot share localStorage directly.
+// Both embed this page (served from the Role origin, 5173) in a hidden iframe and talk to it with postMessage.
+// The queue lives in THIS origin's localStorage, so every portal sees the same data.
+(function () {
+  var KEY = 'lifecare_shared_queue_v1';
+
+  function read() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+  }
+
+  function merge(a, b) {
+    var map = {};
+    a.concat(b).forEach(function (item) {
+      if (!item || !item.id) return;
+      var existing = map[item.id];
+      if (!existing || (item.updatedAt || 0) >= (existing.updatedAt || 0)) map[item.id] = item;
+    });
+    return Object.keys(map).map(function (k) { return map[k]; });
+  }
+
+  function write(items) {
+    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {}
+  }
+
+  function send(target, origin, items) {
+    target.postMessage({ type: 'lc-state', items: items }, origin);
+  }
+
+  window.addEventListener('message', function (event) {
+    var data = event.data;
+    if (!data || typeof data !== 'object' || !event.source) return;
+    if (!/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(event.origin)) return;
+
+    if (data.type === 'lc-get') {
+      send(event.source, event.origin, read());
+    } else if (data.type === 'lc-push' && Array.isArray(data.items)) {
+      var merged = merge(read(), data.items);
+      write(merged);
+      send(event.source, event.origin, merged);
+    }
+  });
+
+  // Another tab / iframe changed the queue -> tell our parent page.
+  window.addEventListener('storage', function (event) {
+    if (event.key !== KEY || !window.parent || window.parent === window) return;
+    window.parent.postMessage({ type: 'lc-state', items: read() }, '*');
+  });
+
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: 'lc-ready' }, '*');
+  }
+})();
+</script>
+</body>
+</html>

@@ -10,7 +10,7 @@ import DonorRegister from "./donor/DonorRegister";
 
 import {
   addAppointment,
-  updateAppointment,
+  rescheduleAppointment,
   cancelAppointment,
 } from "./store/appointmentsSlice";
 
@@ -25,8 +25,8 @@ function App() {
     dispatch(addAppointment(appointment));
   };
 
-  const handleUpdateAppointment = (id, updates) => {
-    dispatch(updateAppointment({ id, updates }));
+  const handleRescheduleAppointment = (id, date, time) => {
+    dispatch(rescheduleAppointment({ id, date, time }));
   };
 
   const handleCancelAppointment = (id) => {
@@ -47,7 +47,7 @@ function App() {
             <Appointments
               appointments={appointments}
               addAppointment={handleAddAppointment}
-              updateAppointment={handleUpdateAppointment}
+              rescheduleAppointment={handleRescheduleAppointment}
               cancelAppointment={handleCancelAppointment}
             />
           }
