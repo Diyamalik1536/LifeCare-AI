@@ -1,10 +1,11 @@
 .donor-table-empty {
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--slate-300);
-  padding: 40px 0;
+  border-radius: 10px;
+  border: 1px dashed #B7DDEB;
+  padding: 40px 16px;
   text-align: center;
   font-size: 14px;
-  color: var(--slate-500);
+  color: #6B8794;
+  background-color: #F9FCFE;
 }
 
 /* Desktop / Tablet Table */
@@ -12,8 +13,9 @@
 .donor-table-wrap {
   display: none;
   overflow-x: auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--slate-200);
+  border-radius: 10px;
+  border: 1px solid #D6EAF3;
+  background-color: #FFFFFF;
 }
 
 .donor-table {
@@ -25,21 +27,22 @@
 }
 
 .donor-table-head-row {
-  border-bottom: 1px solid var(--slate-200);
-  background-color: var(--slate-50);
+  border-bottom: 1px solid #D6EAF3;
+  background-color: #F4FAFD;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--slate-500);
+  color: #6B8794;
 }
 
 .donor-table-th {
   padding: 12px 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .donor-table-row {
-  border-bottom: 1px solid var(--slate-200);
+  border-bottom: 1px solid #E8F3F8;
+  transition: background-color 0.2s ease;
 }
 
 .donor-table-row:last-child {
@@ -47,32 +50,35 @@
 }
 
 .donor-table-row:hover {
-  background-color: var(--slate-50);
+  background-color: #F4FAFD;
 }
 
 .donor-table-td {
   padding: 12px 16px;
+  color: #456573;
 }
 
 .donor-table-td-name {
   font-weight: 600;
-  color: var(--slate-900);
+  color: #183B4A;
 }
 
 .donor-table-td-muted {
   padding: 12px 16px;
-  color: var(--slate-600);
+  color: #6B8794;
 }
 
 /* Blood Type */
 
 .blood-type-chip {
+  display: inline-block;
   border-radius: 999px;
-  background-color: rgba(var(--emergency-500-rgb), 0.1);
+  background-color: #FDEBEC;
+  border: 1px solid #F5CED0;
   padding: 3px 8px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--emergency-600);
+  color: #C94D55;
 }
 
 .blood-type-chip-block {
@@ -84,23 +90,24 @@
 /* Availability */
 
 .availability-badge {
+  display: inline-block;
   border-radius: 999px;
-  padding: 3px 8px;
+  padding: 4px 9px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .availability-badge-available {
-  background-color: rgba(var(--emerald-500-rgb), 0.1);
-  color: var(--emerald-600);
-  box-shadow: inset 0 0 0 1px
-    rgba(var(--emerald-500-rgb), 0.3);
+  background-color: #E5F6EC;
+  color: #27834B;
+  border: 1px solid #C5E8D1;
 }
 
 .availability-badge-unavailable {
-  background-color: var(--slate-100);
-  color: var(--slate-500);
-  box-shadow: inset 0 0 0 1px var(--slate-200);
+  background-color: #F0F5F8;
+  color: #6B8794;
+  border: 1px solid #D6EAF3;
 }
 
 /* Mobile Cards */
@@ -112,22 +119,25 @@
 }
 
 .donor-card {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--slate-200);
-  background-color: var(--surface-muted);
+  border-radius: 10px;
+  border: 1px solid #D6EAF3;
+  background-color: #FFFFFF;
   padding: 16px;
+  box-shadow: 0 2px 8px rgba(36, 152, 209, 0.04);
 }
 
 .donor-card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .donor-card-name {
   margin: 0;
   font-weight: 600;
-  color: var(--slate-900);
+  color: #183B4A;
+  overflow-wrap: anywhere;
 }
 
 .donor-card-location {
@@ -136,13 +146,16 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: var(--slate-500);
+  color: #6B8794;
+  overflow-wrap: anywhere;
 }
 
 .donor-card-bottom {
   margin-top: 10px;
   display: flex;
   align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 /* Desktop */
@@ -157,3 +170,12 @@
   }
 }
 
+@media (max-width: 380px) {
+  .donor-card {
+    padding: 12px;
+  }
+
+  .donor-card-top {
+    gap: 8px;
+  }
+}

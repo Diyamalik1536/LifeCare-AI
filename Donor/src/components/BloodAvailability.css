@@ -1,8 +1,9 @@
 .availability-card {
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(var(--brand-500-rgb), 0.2);
-  background-color: var(--surface-card);
+  border-radius: 14px;
+  border: 1px solid #D6EAF3;
+  background-color: #FFFFFF;
   padding: 20px;
+  box-shadow: 0 2px 8px rgba(36, 152, 209, 0.05);
 }
 
 .availability-header {
@@ -15,11 +16,12 @@
   display: flex;
   height: 44px;
   width: 44px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
-  background-color: rgba(var(--brand-500-rgb), 0.1);
-  color: var(--brand-500);
+  border-radius: 10px;
+  background-color: #E1F3FA;
+  color: #2498D1;
 }
 
 .availability-label {
@@ -28,57 +30,58 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--brand-700);
+  color: #2498D1;
 }
 
 .availability-value {
   margin: 0;
   font-size: 28px;
   font-weight: 800;
-  color: var(--slate-900);
+  color: #183B4A;
 }
 
 .availability-stats-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .summary-stat {
-  border-radius: var(--radius-md);
-  border: 1px solid var(--slate-200);
+  min-width: 0;
+  border-radius: 10px;
+  border: 1px solid #D6EAF3;
   padding: 12px;
   text-align: center;
 }
 
 .summary-stat-emerald {
-  background-color: rgba(var(--emerald-500-rgb), 0.1);
+  background-color: #EAF8EF;
 }
 
 .summary-stat-amber {
-  background-color: rgba(var(--amber-500-rgb), 0.1);
+  background-color: #FFF6D9;
 }
 
 .summary-stat-orange {
-  background-color: rgba(var(--orange-500-rgb), 0.1);
+  background-color: #FFF0E5;
 }
 
 .summary-stat-red {
-  background-color: rgba(var(--emergency-500-rgb), 0.1);
+  background-color: #FDEBEC;
 }
 
 .summary-stat-value {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--slate-900);
+  color: #183B4A;
 }
 
 .summary-stat-label {
-  margin: 0;
+  margin: 4px 0 0;
   font-size: 11px;
-  color: var(--slate-500);
+  color: #6B8794;
 }
 
 .availability-footnote {
@@ -87,7 +90,7 @@
   align-items: center;
   gap: 6px;
   font-size: 11px;
-  color: var(--slate-500);
+  color: #6B8794;
 }
 
 @media (min-width: 640px) {
@@ -96,6 +99,6 @@
   }
 
   .availability-stats-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

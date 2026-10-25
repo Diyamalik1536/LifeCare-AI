@@ -1,63 +1,143 @@
+
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>LifeCare queue bridge</title></head>
+<head>
+  <meta charset="utf-8" />
+  <title>LifeCare AI Shared Bridge</title>
+</head>
 <body>
 <script>
-// LifeCare AI - localStorage bridge (no backend).
-// Patient (5174) and Doctor (5175) run on different origins, so they cannot share localStorage directly.
-// Both embed this page (served from the Role origin, 5173) in a hidden iframe and talk to it with postMessage.
-// The queue lives in THIS origin's localStorage, so every portal sees the same data.
 (function () {
-  var KEY = 'lifecare_shared_queue_v1';
+  const QUEUE_KEY = "lifecare_shared_queue_v1";
 
-  function read() {
+  // Allow only local LifeCare portals.
+  function isAllowedOrigin(origin) {
+    return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+  }
+
+  function readQueue() {
     try {
-      var raw = localStorage.getItem(KEY);
-      var parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) { return []; }
+      const data = JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]");
+      return Array.isArray(data) ? data : [];
+    } catch {
+      return [];
+    }
   }
 
-  function merge(a, b) {
-    var map = {};
-    a.concat(b).forEach(function (item) {
+  function mergeQueues(a, b) {
+    const map = new Map();
+
+    [...a, ...b].forEach((item) => {
       if (!item || !item.id) return;
-      var existing = map[item.id];
-      if (!existing || (item.updatedAt || 0) >= (existing.updatedAt || 0)) map[item.id] = item;
+
+      const existing = map.get(item.id);
+
+      if (
+        !existing ||
+        (item.updatedAt || 0) >= (existing.updatedAt || 0)
+      ) {
+        map.set(item.id, item);
+      }
     });
-    return Object.keys(map).map(function (k) { return map[k]; });
+
+    return Array.from(map.values());
   }
 
-  function write(items) {
-    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {}
+  function sendQueue(target, origin, items) {
+    target.postMessage(
+      { type: "lc-state", items },
+      origin
+    );
   }
 
-  function send(target, origin, items) {
-    target.postMessage({ type: 'lc-state', items: items }, origin);
+  function sendKeyValue(target, origin, key, value) {
+    target.postMessage({ key, value }, origin);
   }
 
-  window.addEventListener('message', function (event) {
-    var data = event.data;
-    if (!data || typeof data !== 'object' || !event.source) return;
-    if (!/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(event.origin)) return;
+  window.addEventListener("message", function (event) {
+    if (!isAllowedOrigin(event.origin)) return;
+    if (!event.source) return;
 
-    if (data.type === 'lc-get') {
-      send(event.source, event.origin, read());
-    } else if (data.type === 'lc-push' && Array.isArray(data.items)) {
-      var merged = merge(read(), data.items);
-      write(merged);
-      send(event.source, event.origin, merged);
+    const data = event.data;
+    if (!data || typeof data !== "object") return;
+
+    // Existing appointment queue bridge.
+    if (data.type === "lc-get") {
+      sendQueue(event.source, event.origin, readQueue());
+      return;
+    }
+
+    if (data.type === "lc-push" && Array.isArray(data.items)) {
+      const merged = mergeQueues(readQueue(), data.items);
+
+      try {
+        localStorage.setItem(QUEUE_KEY, JSON.stringify(merged));
+      } catch (error) {
+        console.error("Could not save shared queue:", error);
+      }
+
+      sendQueue(event.source, event.origin, merged);
+      return;
+    }
+
+    // Shared Redux data: donor registrations and other named keys.
+    if (
+      (data.type === "get" || data.type === "set") &&
+      typeof data.key === "string" &&
+      /^[a-zA-Z0-9_-]+$/.test(data.key)
+    ) {
+      if (data.type === "get") {
+        sendKeyValue(
+          event.source,
+          event.origin,
+          data.key,
+          localStorage.getItem(data.key)
+        );
+        return;
+      }
+
+      if (data.type === "set" && typeof data.value === "string") {
+        try {
+          // Validate the JSON before saving it.
+          JSON.parse(data.value);
+          localStorage.setItem(data.key, data.value);
+
+          sendKeyValue(
+            event.source,
+            event.origin,
+            data.key,
+            data.value
+          );
+        } catch (error) {
+          console.error("Could not save shared data:", error);
+        }
+      }
     }
   });
 
-  // Another tab / iframe changed the queue -> tell our parent page.
-  window.addEventListener('storage', function (event) {
-    if (event.key !== KEY || !window.parent || window.parent === window) return;
-    window.parent.postMessage({ type: 'lc-state', items: read() }, '*');
+  // Notify each portal when another bridge instance changes shared storage.
+  window.addEventListener("storage", function (event) {
+    if (event.key === QUEUE_KEY) {
+      if (window.parent !== window) {
+        sendQueue(window.parent, "*", readQueue());
+      }
+      return;
+    }
+
+    if (event.key && window.parent !== window) {
+      window.parent.postMessage(
+        {
+          key: event.key,
+          value: event.newValue
+        },
+        "*"
+      );
+    }
   });
 
-  if (window.parent && window.parent !== window) {
-    window.parent.postMessage({ type: 'lc-ready' }, '*');
+  // Tell the parent that the bridge is ready.
+  if (window.parent !== window) {
+    window.parent.postMessage({ type: "lc-ready" }, "*");
   }
 })();
 </script>

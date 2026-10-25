@@ -1,9 +1,10 @@
 .inventory-overview {
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--slate-200);
-  background-color: var(--surface-card);
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg, 14px);
+  border: 1px solid #D6EAF3;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(36, 152, 209, 0.05);
   padding: 16px;
+  min-width: 0;
 }
 
 .inventory-overview-header {
@@ -17,31 +18,34 @@
 .inventory-overview-title-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .inventory-icon {
   display: flex;
   height: 36px;
   width: 36px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
-  background-color: rgba(var(--brand-500-rgb), 0.1);
-  color: var(--brand-500);
+  border-radius: 10px;
+  background-color: #E1F3FA;
+  color: #2498D1;
 }
 
 .inventory-overview-title {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: var(--slate-900);
+  color: #183B4A;
 }
 
 .inventory-overview-subtitle {
-  margin: 0;
+  margin: 5px 0 0;
   font-size: 12px;
-  color: var(--slate-500);
+  color: #6B8794;
+  line-height: 1.5;
 }
 
 .critical-badge {
@@ -49,18 +53,18 @@
   align-items: center;
   gap: 6px;
   border-radius: 999px;
-  background-color: rgba(var(--emergency-500-rgb), 0.1);
-  box-shadow: inset 0 0 0 1px rgba(var(--emergency-500-rgb), 0.3);
+  background-color: #FDEBEC;
+  border: 1px solid #F5CED0;
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--emergency-600);
+  color: #C94D55;
 }
 
 .inventory-grid {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -74,18 +78,24 @@
   }
 
   .inventory-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 768px) {
   .inventory-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
   .inventory-grid {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .inventory-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

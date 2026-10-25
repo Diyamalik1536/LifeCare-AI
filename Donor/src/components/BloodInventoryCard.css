@@ -1,151 +1,147 @@
-
 .inventory-card {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  border: 1px solid #D6EAF3;
+  border-radius: 14px;
+  background: #FFFFFF;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(36, 152, 209, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  border: 1px solid var(--slate-200);
-  border-radius: 10px;
-  background: white;
-  padding: 12px;
+.inventory-card:hover {
+  border-color: #B7DDEB;
+  box-shadow: 0 3px 10px rgba(36, 152, 209, 0.08);
 }
 
 .inventory-card-critical {
-  border-color: #f1b5b5;
+  border-color: #F1B5B5;
 }
 
 .inventory-card-low {
-  border-color: #f3c7a5;
+  border-color: #F3C7A5;
 }
 
 .inventory-card-moderate {
-  border-color: #ead99a;
+  border-color: #EAD99A;
 }
 
 .inventory-card-stable {
-  border-color: #b8dfc8;
+  border-color: #B8DFC8;
 }
 
-/* Top */
 .inventory-card-top {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .inventory-card-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-
-  border-radius: 7px;
-  background: #e8f5fb;
-  color: #2498d1;
+  border-radius: 9px;
+  background: #E1F3FA;
+  color: #2498D1;
 }
 
 .inventory-card-type {
   font-size: 16px;
   font-weight: 700;
-  color: #183b4a;
+  color: #183B4A;
 }
 
-/* Percentage + Status */
 .inventory-card-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 6px;
-
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .inventory-card-percentage {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
-  color: #183b4a;
+  color: #183B4A;
 }
 
 .status-badge {
+  display: inline-block;
   flex-shrink: 0;
-
-  padding: 3px 6px;
+  padding: 4px 8px;
   border-radius: 999px;
-
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-/* Status */
 .status-badge-critical {
-  background: #fff0f0;
-  color: #d64545;
+  background: #FDEBEC;
+  color: #C94D55;
 }
 
 .status-badge-low {
-  background: #fff4eb;
-  color: #d97732;
+  background: #FFF0E5;
+  color: #B9652A;
 }
 
 .status-badge-moderate {
-  background: #fff9df;
-  color: #9b7a00;
+  background: #FFF6D9;
+  color: #947300;
 }
 
 .status-badge-stable {
-  background: #eaf8ef;
-  color: #27834b;
+  background: #E5F6EC;
+  color: #27834B;
 }
 
-/* Progress bar */
 .inventory-card-track {
   width: 100%;
   height: 6px;
-
-  margin-top: 8px;
-
+  margin-top: 10px;
   overflow: hidden;
   border-radius: 999px;
-  background: #edf1f3;
+  background: #E8F3F8;
 }
 
 .inventory-card-bar {
   width: var(--bar-width, 0%);
   height: 100%;
   border-radius: 999px;
+  transition: width 0.3s ease;
 }
 
 .inventory-card-bar-critical {
-  background: #d64545;
+  background: #D64545;
 }
 
 .inventory-card-bar-low {
-  background: #d97732;
+  background: #D97732;
 }
 
 .inventory-card-bar-moderate {
-  background: #d1ad32;
+  background: #D1AD32;
 }
 
 .inventory-card-bar-stable {
-  background: #3ca66b;
+  background: #3FA66B;
 }
 
-/* Units */
 .inventory-card-units {
-  margin: 7px 0 0;
-
-  font-size: 11px;
-  color: #6b8794;
+  margin: 9px 0 0;
+  font-size: 12px;
+  color: #6B8794;
+  line-height: 1.5;
 }
 
-/* Small screens */
 @media (max-width: 600px) {
   .inventory-card {
-    padding: 10px;
+    padding: 12px;
   }
 
   .inventory-card-type {
@@ -153,7 +149,6 @@
   }
 
   .inventory-card-percentage {
-    font-size: 18px;
+    font-size: 19px;
   }
 }
-
