@@ -117,12 +117,6 @@
   .header {
     padding: 14px 16px;
     align-items: flex-start;
-    min-height: 0;
-    gap: 12px;
-  }
-
-  .header-title {
-    font-size: 18px;
   }
 
   .header-right {
@@ -134,7 +128,6 @@
 
   .header-doctor {
     padding-left: 10px;
-    min-width: 0;
   }
 
   .header-date {
@@ -148,24 +141,3 @@
     scroll-behavior: auto;
   }
 }
-
-@media (max-width: 360px) {
-  .header-doctor {
-    border-left: none;
-    padding-left: 0;
-  }
-}
-
-
-.header-doctor-select {
-  border: none;
-  background: transparent;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 650;
-  color: #16324F;
-  cursor: pointer;
-  padding: 0;
-  max-width: 160px;
-}
-.header-doctor-select:focus-visible { outline: 2px solid #2498d1; border-radius: 4px; }

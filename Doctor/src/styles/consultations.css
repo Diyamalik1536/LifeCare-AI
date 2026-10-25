@@ -2,10 +2,6 @@
 /* Consultations Page Styles     */
 /* ============================= */
 
-.consultations-main > * {
-  min-width: 0;
-}
-
 .consultations-main {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -29,7 +25,6 @@
 .current-patient-header {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 24px;
   padding-bottom: 20px;
@@ -39,7 +34,6 @@
 .current-patient-avatar {
   width: 48px;
   height: 48px;
-  flex-shrink: 0;
   border-radius: 50%;
   background: #EEF7FD;
   color: #2196D3;
@@ -50,8 +44,7 @@
 }
 
 .current-patient-info {
-  flex: 1 1 160px;
-  min-width: 0;
+  flex: 1;
 }
 
 .current-patient-label {
@@ -100,22 +93,9 @@
   border-color: #2196D3;
 }
 
-/* Stack the two columns: narrow desktop (sidebar visible) and phones/tablets portrait */
-@media (min-width: 901px) and (max-width: 1100px),
-  (max-width: 760px) {
+/* Responsive: stack the two columns on smaller screens */
+@media (max-width: 950px) {
   .consultations-main {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .consultation-list-card,
-  .current-patient-card {
-    padding: 16px;
-  }
-
-  .current-patient-header {
-    margin-bottom: 18px;
-    padding-bottom: 16px;
   }
 }
