@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "../components/Navbar.jsx";
 import BloodInventoryOverview from "../components/BloodInventoryOverview.jsx";
@@ -6,12 +7,13 @@ import BloodAvailability from "../components/BloodAvailability.jsx";
 import AvailableDonors from "../components/AvailableDonors.jsx";
 import EmergencyRequests from "../components/EmergencyRequests.jsx";
 import BecomeDonorModal from "../components/BecomeDonorModal.jsx";
+import DonorRequests from "../components/DonorRequests.jsx";
+import { addDonorRequest } from "../store/donorsSlice.js";
 
 import {
   initialBloodInventory,
   initialDonors,
   initialEmergencyRequests,
-  generateId,
 } from "../data/mockData.js";
 
 import "./BloodDonation.css";
@@ -19,19 +21,20 @@ import "./BloodDonation.css";
 export default function BloodDonation() {
   const inventory = initialBloodInventory;
 
-  const [donors, setDonors] = useState(initialDonors);
+  const dispatch = useDispatch();
+
+  // Donors shown = approved registrations from the queue + the existing list
+  const donorRequests = useSelector((state) => state.donors.requests);
+  const approved = donorRequests.filter((request) => request.status === "Approved");
+  const donors = [...approved, ...initialDonors];
 
   const requests = initialEmergencyRequests;
 
   const [donorModalOpen, setDonorModalOpen] = useState(false);
 
   function handleDonorSubmit(donorData) {
-    const newDonor = {
-      id: generateId("d"),
-      ...donorData,
-    };
-
-    setDonors((prev) => [newDonor, ...prev]);
+    // Goes to the queue first; it appears in the list once approved
+    dispatch(addDonorRequest(donorData));
 
     setDonorModalOpen(false);
   }
@@ -62,6 +65,8 @@ export default function BloodDonation() {
               <BloodAvailability
                 inventory={inventory}
               />
+
+              <DonorRequests />
 
               <EmergencyRequests
                 requests={requests}

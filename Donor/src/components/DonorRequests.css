@@ -1,0 +1,67 @@
+.donor-queue {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--slate-200);
+  background-color: var(--surface-card);
+  padding: 20px;
+}
+
+.donor-queue-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.donor-queue-subtitle {
+  margin: 4px 0 12px;
+  font-size: 13px;
+  color: var(--slate-500);
+}
+
+.donor-queue-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--slate-200);
+}
+
+.donor-queue-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.donor-queue-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--slate-900);
+}
+
+.donor-queue-meta {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--slate-500);
+}
+
+.donor-history-title {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.donor-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.donor-badge.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.donor-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}

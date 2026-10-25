@@ -1,52 +1,75 @@
-import { Droplet } from "lucide-react";
-import "./BloodInventoryCard.css";
+import { ClipboardList, AlertTriangle } from "lucide-react";
+import BloodInventoryCard from "./BloodInventoryCard.jsx";
+import { getInventoryStatus } from "../data/mockData.js";
 
-export default function BloodInventoryCard({
-  bloodType,
-  percentage,
-  units,
-  status,
-}) {
-  const statusClass = status.toLowerCase();
+import "./BloodInventoryOverview.css";
+
+export default function BloodInventoryOverview({ inventory }) {
+
+  const enriched = inventory.map((item) => {
+    const percentage = Math.round(
+      (item.units / item.totalCapacity) * 100
+    );
+
+    return {
+      ...item,
+      percentage,
+      status: getInventoryStatus(percentage),
+    };
+  });
+
+  const criticalCount = enriched.filter(
+    (item) => item.status === "Critical"
+  ).length;
 
   return (
-    <div className={`inventory-card inventory-card-${statusClass}`}>
+    <section className="inventory-overview">
 
-      <div className="inventory-card-top">
+      <div className="inventory-overview-header">
 
-        <div className="inventory-card-icon">
-          <Droplet size={16} />
+        <div className="inventory-overview-title-group">
+
+          <div className="inventory-icon">
+            <ClipboardList size={18} />
+          </div>
+
+          <div>
+            <h2 className="inventory-overview-title">
+              Blood Inventory Overview
+            </h2>
+
+            <p className="inventory-overview-subtitle">
+              Blood stock across all blood groups
+            </p>
+          </div>
+
         </div>
 
-        <span className="inventory-card-type">
-          {bloodType}
-        </span>
+        {criticalCount > 0 && (
+          <div className="critical-badge">
+            <AlertTriangle size={14} />
+
+            {criticalCount} blood group
+            {criticalCount > 1 ? "s" : ""} critical
+          </div>
+        )}
 
       </div>
 
-      <div className="inventory-card-row">
+      <div className="inventory-grid">
 
-        <span className="inventory-card-percentage">
-          {percentage}%
-        </span>
-
-        <span className={`status-badge status-badge-${statusClass}`}>
-          {status}
-        </span>
+        {enriched.map((item) => (
+          <BloodInventoryCard
+            key={item.bloodType}
+            bloodType={item.bloodType}
+            percentage={item.percentage}
+            units={item.units}
+            status={item.status}
+          />
+        ))}
 
       </div>
 
-      <div className="inventory-card-track">
-        <div
-          className={`inventory-card-bar inventory-card-bar-${statusClass}`}
-          style={{ "--bar-width": `${percentage}%` }}
-        />
-      </div>
-
-      <p className="inventory-card-units">
-        {units} units available
-      </p>
-
-    </div>
+    </section>
   );
 }

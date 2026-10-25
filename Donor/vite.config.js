@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     host: true,        // bind IPv4 (127.0.0.1) + IPv6 so Chrome can connect
     port: 5176,
-    strictPort: false, // use the next free port if 5173 is taken
+    strictPort: true,
     open: true,        // auto-open the default browser
   },
 })
