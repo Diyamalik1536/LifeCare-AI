@@ -17,7 +17,7 @@ function Header({ pageTitle }) {
       <div className="header-right">
         <div className="header-date">
           <MdOutlineCalendarToday className="header-date-icon" />
-          <span>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          <span>September 7, 2026</span>
         </div>
 
         <div className="header-doctor">
@@ -25,16 +25,9 @@ function Header({ pageTitle }) {
             {doctor.initials}
           </div>
           <div>
-            <select
-              className="header-doctor-select"
-              value={doctor.name}
-              onChange={(e) => doctor.selectDoctor(e.target.value)}
-              aria-label="Select doctor"
-            >
-              {doctor.doctors.map((d) => (
-                <option key={d.name} value={d.name}>{d.name}</option>
-              ))}
-            </select>
+            <p className="header-doctor-name">
+              {doctor.name}
+            </p>
             <p className="header-doctor-role">
               {doctor.role}
             </p>
