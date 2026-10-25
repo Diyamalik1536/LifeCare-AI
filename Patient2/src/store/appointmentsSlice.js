@@ -2,8 +2,6 @@ import { createSlice, current } from "@reduxjs/toolkit";
 import { loadLocalQueue } from "../queue/sharedStorage";
 import { mergeQueues } from "../queue/queueUtils";
 
-import { createSlice } from "@reduxjs/toolkit";
-
 const sampleAppointments = [
   {
     id: "APT-SAMPLE-1",
@@ -39,36 +37,40 @@ const sampleAppointments = [
     queueStatus: "Completed",
   },
 ];
+
 const now = () => Date.now();
 
 const appointmentsSlice = createSlice({
   name: "appointments",
 
   initialState: {
-    items: sampleAppointments,
+    items: loadLocalQueue() ?? sampleAppointments,
   },
 
   reducers: {
-    // Replaces everything with the data coming from the shared storage
+    // Load or replace appointments
     setAppointments: (state, action) => {
       state.items = action.payload;
     },
 
-  initialState: { items: loadLocalQueue() },
-
-  reducers: {
-    // Patient books -> joins the END of the doctor's queue for that date.
+    // Patient books an appointment and joins the end of the queue
     addAppointment: (state, action) => {
       const { doctor, date } = action.payload;
+
       const lastToken = state.items
-        .filter((i) => i.doctor === doctor && i.date === date)
-        .reduce((max, i) => Math.max(max, i.token || 0), 0);
+        .filter(
+          (item) =>
+            item.doctor === doctor &&
+            item.date === date &&
+            item.status !== "Cancelled"
+        )
+        .reduce((max, item) => Math.max(max, item.token || 0), 0);
 
       state.items.push({
         id: `APT-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         status: "Pending",
         queueStatus: "Waiting",
-        requestedAt: Date.now(), // decides the position in the doctor's queue
+        requestedAt: Date.now(),
         ...action.payload,
         token: lastToken + 1,
         createdAt: now(),
@@ -76,15 +78,22 @@ const appointmentsSlice = createSlice({
       });
     },
 
-    // Reschedule = leave the old queue and join the end of the new one.
+    // Reschedule an appointment
     rescheduleAppointment: (state, action) => {
       const { id, date, time } = action.payload;
-      const item = state.items.find((i) => i.id === id);
+      const item = state.items.find((appointment) => appointment.id === id);
+
       if (!item) return;
 
       const lastToken = state.items
-        .filter((i) => i.id !== id && i.doctor === item.doctor && i.date === date)
-        .reduce((max, i) => Math.max(max, i.token || 0), 0);
+        .filter(
+          (appointment) =>
+            appointment.id !== id &&
+            appointment.doctor === item.doctor &&
+            appointment.date === date &&
+            appointment.status !== "Cancelled"
+        )
+        .reduce((max, appointment) => Math.max(max, appointment.token || 0), 0);
 
       item.date = date;
       item.time = time;
@@ -94,8 +103,12 @@ const appointmentsSlice = createSlice({
       item.updatedAt = now();
     },
 
+    // Cancel an appointment
     cancelAppointment: (state, action) => {
-      const item = state.items.find((i) => i.id === action.payload);
+      const item = state.items.find(
+        (appointment) => appointment.id === action.payload
+      );
+
       if (item) {
         item.status = "Cancelled";
         item.queueStatus = "Cancelled";
@@ -103,10 +116,12 @@ const appointmentsSlice = createSlice({
       }
     },
 
-    // Data arriving from the other portal / other tab.
+    // Merge appointments received from shared storage
     hydrateQueue: (state, action) => {
-      const merged = mergeQueues(current(state).items, action.payload);
-      if (JSON.stringify(merged) !== JSON.stringify(current(state).items)) {
+      const existingItems = current(state).items;
+      const merged = mergeQueues(existingItems, action.payload);
+
+      if (JSON.stringify(merged) !== JSON.stringify(existingItems)) {
         state.items = merged;
       }
     },
